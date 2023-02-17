@@ -11,9 +11,9 @@ export function MyComponent(props: MyComponentProps) {
         <Alert
             className={className}
             closable
-            description="Everything went well !!! ok"
+            description="Everything went well"
             severity="success"
-            title="Super !!!!!  <3"
+            title="Super !!!!!"
         />
     );
 }

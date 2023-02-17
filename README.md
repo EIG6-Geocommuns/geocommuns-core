@@ -27,16 +27,33 @@
 # Install / Import
 
 ```bash
-$ npm install --save geocommuns-core
+$ yarn add geocommuns-core
 ```
 
-```typescript
-import { myFunction, myObject } from "geocommuns-core";
-```
+# Link this module in main project
 
-Specific imports:
+```bash
+cd ~/github
+git clone https://github.com/EIG6-Geocommuns/lidarviz-front
+cd lidarviz-front
+yarn
 
-```typescript
-import { myFunction } from "geocommuns-core/myFunction";
-import { myObject } from "geocommuns-core/myObject";
+cd ~/github
+git clone https://github.com/EIG6-Geocommuns/another-app
+cd another-app
+yarn
+
+cd ~/github
+git clone https://github.com/isMattCoding/lunatic-dsfr
+cd lunatic-dsfr
+yarn
+yarn build
+yarn link-in-main-project lidarviz-front another-app
+npx tsc -w
+
+# Open another terminal
+
+cd ~/github/lidarviz-front
+rm -rf node_modules/.cache
+yarn start
 ```
