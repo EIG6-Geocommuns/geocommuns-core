@@ -39,8 +39,8 @@ cd lidarviz-front
 yarn
 
 cd ~/github
-git clone https://github.com/EIG6-Geocommuns/another-app
-cd another-app
+git clone https://github.com/EIG6-ArtificIA/predictia_front
+cd predictia_front
 yarn
 
 cd ~/github
