@@ -44,8 +44,8 @@ cd another-app
 yarn
 
 cd ~/github
-git clone https://github.com/isMattCoding/lunatic-dsfr
-cd lunatic-dsfr
+git clone https://github.com/EIG6-Geocommuns/geocommuns-core
+cd geocommuns-core
 yarn
 yarn build
 yarn link-in-main-project lidarviz-front another-app

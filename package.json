@@ -1,7 +1,7 @@
 {
     "name": "geocommuns-core",
     "version": "0.0.2",
-    "description": "Set of shared utilities (hooks and Components) for the geocomuns project",
+    "description": "Set of shared utilities (hooks and Components) for the geocommuns project",
     "repository": {
         "type": "git",
         "url": "git://github.com/EIG6-Geocommuns/geocommuns-core.git"
