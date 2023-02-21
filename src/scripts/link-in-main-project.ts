@@ -35,6 +35,7 @@ const commonThirdPartyDeps = (() => {
     "@codegouvfr/react-dsfr",
     "tss-react",
     "react-router-dom",
+    "ol",
   ];
 
   return [
