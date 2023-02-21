@@ -62,5 +62,10 @@ export const useMap = (target: string, center: [number, number], zoom: number, l
     map?.addLayer(layer);
   };
 
-  return { setNewCenterAndNewZoom, fitViewToPolygon };
+  const setLayerOpacity = (layer: Layer, opacityValue: number) => {
+    const ol_layer = LAYER_TO_OPENLAYER_LAYER[layer];
+    ol_layer.setOpacity(opacityValue);
+  };
+
+  return { setNewCenterAndNewZoom, fitViewToPolygon, setLayerOpacity };
 };
