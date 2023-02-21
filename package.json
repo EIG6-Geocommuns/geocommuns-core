@@ -1,69 +1,71 @@
 {
-    "name": "geocommuns-core",
-    "version": "0.0.2",
-    "description": "Set of shared utilities (hooks and Components) for the geocommuns project",
-    "repository": {
-        "type": "git",
-        "url": "git://github.com/EIG6-Geocommuns/geocommuns-core.git"
-    },
-    "main": "dist/index.js",
-    "types": "dist/index.d.ts",
-    "scripts": {
-        "test": "echo DODO",
-        "build": "tsc",
-        "lint:check": "eslint . --ext .ts,.tsx",
-        "lint": "npm run lint:check -- --fix",
-        "_format": "prettier '**/*.{ts,tsx,json,md}'",
-        "format": "npm run _format -- --write",
-        "format:check": "npm run _format -- --list-different",
-        "link-in-main-project": "ts-node --skipProject src/scripts/link-in-main-project.ts"
-    },
-    "lint-staged": {
-        "*.{ts,tsx}": [
-            "eslint --fix"
-        ],
-        "*.{ts,tsx,json,md}": [
-            "prettier --write"
-        ]
-    },
-    "husky": {
-        "hooks": {
-            "pre-commit": "lint-staged -v"
-        }
-    },
-    "author": "u/EIG6-Geocommuns",
-    "license": "MIT",
-    "files": [
-        "src/",
-        "!src/test/",
-        "!src/scripts",
-        "dist/",
-        "!dist/test/",
-        "!dist/tsconfig.tsbuildinfo"
+  "name": "geocommuns-core",
+  "version": "0.0.2",
+  "description": "Set of shared utilities (hooks and Components) for the geocommuns project",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/EIG6-Geocommuns/geocommuns-core.git"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "echo DODO",
+    "build": "tsc",
+    "lint:check": "eslint . --ext .ts,.tsx",
+    "lint": "npm run lint:check -- --fix",
+    "_format": "prettier '**/*.{ts,tsx,json,md}'",
+    "format": "npm run _format -- --write",
+    "format:check": "npm run _format -- --list-different",
+    "link-in-main-project": "ts-node --skipProject src/scripts/link-in-main-project.ts"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "eslint --fix"
     ],
-    "keywords": [],
-    "homepage": "https://github.com/EIG6-Geocommuns/geocommuns-core",
-    "peerDependencies": {
-        "react": "*",
-        "@codegouvfr/react-dsfr": "^0.33.1",
-        "@emotion/react": "^11.10.5",
-        "tss-react": "^4.6.1"
-    },
-    "devDependencies": {
-        "react": "^18.2.0",
-        "@codegouvfr/react-dsfr": "^0.33.1",
-        "@emotion/react": "^11.10.5",
-        "tss-react": "^4.6.1",
-        "@types/node": "^18.13.0",
-        "typescript": "^4.9.5",
-        "@typescript-eslint/eslint-plugin": "^4.28.5",
-        "@typescript-eslint/parser": "^4.28.5",
-        "eslint": "^7.32.0",
-        "eslint-config-prettier": "^8.3.0",
-        "husky": "^4.3.8",
-        "lint-staged": "^11.1.1",
-        "prettier": "^2.3.2",
-        "@types/react": "^18.0.28",
-        "ts-node": "^10.9.1"
+    "*.{ts,tsx,json,md}": [
+      "prettier --write"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged -v"
     }
+  },
+  "author": "u/EIG6-Geocommuns",
+  "license": "MIT",
+  "files": [
+    "src/",
+    "!src/test/",
+    "!src/scripts",
+    "dist/",
+    "!dist/test/",
+    "!dist/tsconfig.tsbuildinfo"
+  ],
+  "keywords": [],
+  "homepage": "https://github.com/EIG6-Geocommuns/geocommuns-core",
+  "peerDependencies": {
+    "react": "*",
+    "@codegouvfr/react-dsfr": "^0.33.2",
+    "@emotion/react": "^11.10.5",
+    "tss-react": "^4.6.1",
+    "react-router-dom": "^6.8.1"
+  },
+  "devDependencies": {
+    "react": "^18.2.0",
+    "@codegouvfr/react-dsfr": "^0.33.2",
+    "@emotion/react": "^11.10.5",
+    "tss-react": "^4.6.1",
+    "react-router-dom": "^6.8.1",
+    "@types/node": "^18.13.0",
+    "typescript": "^4.9.5",
+    "@typescript-eslint/eslint-plugin": "^4.28.5",
+    "@typescript-eslint/parser": "^4.28.5",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "husky": "^4.3.8",
+    "lint-staged": "^11.1.1",
+    "prettier": "^2.3.2",
+    "@types/react": "^18.0.28",
+    "ts-node": "^10.9.1"
+  }
 }

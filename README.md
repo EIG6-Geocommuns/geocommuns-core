@@ -48,7 +48,7 @@ git clone https://github.com/EIG6-Geocommuns/geocommuns-core
 cd geocommuns-core
 yarn
 yarn build
-yarn link-in-main-project lidarviz-front another-app
+yarn link-in-main-project lidarviz-front predictia_front
 npx tsc -w
 
 # Open another terminal
