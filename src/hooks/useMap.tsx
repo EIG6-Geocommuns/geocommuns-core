@@ -1,19 +1,29 @@
 import { useEffect, useState } from "react";
-import { getIgnWMTSTileLayer, aiPredictionLayer } from "../map/ignTileLayer";
 import { Feature, Map, View } from "ol";
 import { fromLonLat, Projection } from "ol/proj";
-import { zoomController, positionCurseurController } from "../map/controllers";
 import { Polygon } from "ol/geom";
 import { Coordinate } from "ol/coordinate";
 import { Vector as VectorLayer } from "ol/layer";
 import VectorSource from "ol/source/Vector";
+import BaseLayer from "ol/layer/Base";
 
-export const useMap = (target: string, center: [number, number], zoom: number) => {
+import { zoomController, positionCurseurController } from "../map/controllers";
+import { getIgnWMTSTileLayer, aiPredictionLayer } from "../map/ignTileLayer";
+
+type Layer = "planIGN" | "ortho" | "admin" | "aiPrediction";
+
+const LAYER_TO_OPENLAYER_LAYER: { [key in Layer]: BaseLayer } = {
+  "planIGN": getIgnWMTSTileLayer("GEOGRAPHICALGRIDSYSTEMS.PLANIGNV2"),
+  "ortho": getIgnWMTSTileLayer("ORTHOIMAGERY.ORTHOPHOTOS"),
+  "admin": getIgnWMTSTileLayer("LIMITES_ADMINISTRATIVES_EXPRESS.LATEST"),
+  "aiPrediction": aiPredictionLayer,
+};
+
+export const useMap = (target: string, center: [number, number], zoom: number, layers: Layer[]) => {
   const [view, setView] = useState<View | undefined>(undefined);
   const [map, setMap] = useState<Map | undefined>(undefined);
 
-  const orthoLayer = getIgnWMTSTileLayer("ORTHOIMAGERY.ORTHOPHOTOS");
-  const adminLayer = getIgnWMTSTileLayer("LIMITES_ADMINISTRATIVES_EXPRESS.LATEST");
+  const mapLayers = layers.map(layer => LAYER_TO_OPENLAYER_LAYER[layer]);
 
   const initialView = new View({
     zoom,
@@ -23,7 +33,7 @@ export const useMap = (target: string, center: [number, number], zoom: number) =
   useEffect(() => {
     const map = new Map({
       target,
-      layers: [orthoLayer, adminLayer, aiPredictionLayer],
+      layers: mapLayers,
       view: initialView,
       controls: [zoomController, positionCurseurController],
     });

@@ -4,19 +4,19 @@ import WMTS from "ol/source/WMTS";
 import WMTSTileGrid from "ol/tilegrid/WMTS";
 import ImageWMS from "ol/source/ImageWMS";
 
-type IGN_LAYERS =
+type IGNLayers =
   | "GEOGRAPHICALGRIDSYSTEMS.PLANIGNV2"
   | "ORTHOIMAGERY.ORTHOPHOTOS"
   | "LIMITES_ADMINISTRATIVES_EXPRESS.LATEST";
 
-const LAYERS_TO_FORMAT: { [key in IGN_LAYERS]: "image/jpeg" | "image/png" } = {
+const LAYERS_TO_FORMAT: { [key in IGNLayers]: "image/jpeg" | "image/png" } = {
   "GEOGRAPHICALGRIDSYSTEMS.PLANIGNV2": "image/png",
   "ORTHOIMAGERY.ORTHOPHOTOS": "image/jpeg",
   "LIMITES_ADMINISTRATIVES_EXPRESS.LATEST": "image/png",
 };
 
 const LAYERS_TO_URL_CODE: {
-  [key in IGN_LAYERS]: "choisirgeoportail" | "0gd4sx9gxx6ves3hf3hfeyhw";
+  [key in IGNLayers]: "choisirgeoportail" | "0gd4sx9gxx6ves3hf3hfeyhw";
 } = {
   "GEOGRAPHICALGRIDSYSTEMS.PLANIGNV2": "choisirgeoportail",
   "ORTHOIMAGERY.ORTHOPHOTOS": "choisirgeoportail",
@@ -25,7 +25,7 @@ const LAYERS_TO_URL_CODE: {
 
 const EPSG3857 = "EPSG:3857";
 
-const getIgnWMTS = (layer: IGN_LAYERS): WMTS => {
+const getIgnWMTS = (layer: IGNLayers): WMTS => {
   const resolutions = [
     156543.03392804103, 78271.5169640205, 39135.75848201024, 19567.879241005125, 9783.939620502562,
     4891.969810251281, 2445.9849051256406, 1222.9924525628203, 611.4962262814101, 305.74811314070485,
@@ -72,7 +72,7 @@ const getIgnWMTS = (layer: IGN_LAYERS): WMTS => {
   });
 };
 
-export const getIgnWMTSTileLayer = (layer: IGN_LAYERS) => {
+export const getIgnWMTSTileLayer = (layer: IGNLayers) => {
   const source = getIgnWMTS(layer);
   return new TileLayer({ source });
 };
