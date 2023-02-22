@@ -9,13 +9,22 @@
   padding: 30px;
 }
 
-.map_controllers_zoom_button {
-  margin-top: 10px;
-  height: 34px;
-  width: 34px;
-  border-radius: 21px;
+.map_controllers_zoom_in_button {
+  height: 40px;
+  width: 40px;
+  border-radius: 8px 8px 0px 0px;
   background-color: white;
-  font-size: larger;
-  border-color: black;
-  border-width: inherit;
+  font-size: x-large;
+  color: #000091;
+  border: 1px solid #000091;
+}
+
+.map_controllers_zoom_out_button {
+  height: 40px;
+  width: 40px;
+  border-radius: 0px 0px 8px 8px;
+  background-color: white;
+  font-size: x-large;
+  color: #000091;
+  border: 1px solid #000091;
 }

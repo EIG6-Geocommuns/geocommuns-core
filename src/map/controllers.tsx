@@ -7,8 +7,8 @@ export const zoomController = new Zoom({
   zoomInTipLabel: "Zoomer",
   zoomOutTipLabel: "Dézoomer",
   className: "map_controllers_zoom",
-  zoomInClassName: "map_controllers_zoom_button",
-  zoomOutClassName: "map_controllers_zoom_button",
+  zoomInClassName: "map_controllers_zoom_in_button",
+  zoomOutClassName: "map_controllers_zoom_out_button",
 });
 
 export const positionCurseurController = new MousePosition({
