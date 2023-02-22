@@ -7,7 +7,7 @@ import { Vector as VectorLayer } from "ol/layer";
 import VectorSource from "ol/source/Vector";
 import BaseLayer from "ol/layer/Base";
 
-import { zoomController, positionCurseurController } from "../map/controllers";
+import { zoomController, fullScreenController } from "../map/controllers";
 import { getIgnWMTSTileLayer, aiPredictionLayer } from "../map/ignTileLayer";
 
 export type AvailableLayer = "planIGN" | "ortho" | "admin" | "aiPrediction";
@@ -40,7 +40,7 @@ export const useMap = (
       target,
       layers: mapLayers,
       view: initialView,
-      controls: [zoomController, positionCurseurController],
+      controls: [zoomController, fullScreenController],
     });
     setMap(map);
     setView(initialView);

@@ -6,7 +6,7 @@
   bottom: 0;
   right: 0;
   flex-direction: column;
-  padding: 30px;
+  margin: 30px;
 }
 
 .map_controllers_zoom_in_button {
@@ -26,5 +26,37 @@
   background-color: white;
   font-size: x-large;
   color: #000091;
+  border: 1px solid #000091;
+}
+
+.map_controllers_full_screen {
+  display: flex;
+  justify-content: flex-end;
+  height: 100%;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  flex-direction: column;
+  margin: 30px;
+  margin-bottom: 118px;
+  border-radius: 8px;
+  color: #000091;
+}
+
+.map_controllers_full_screen_active {
+  height: 40px;
+  width: 40px;
+  border-radius: 8px;
+  background-color: white;
+  font-size: large;
+  border: 1px solid #000091;
+}
+
+.map_controllers_full_screen_inactive {
+  height: 40px;
+  width: 40px;
+  border-radius: 8px;
+  background-color: white;
+  font-size: large;
   border: 1px solid #000091;
 }

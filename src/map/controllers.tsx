@@ -1,4 +1,4 @@
-import { MousePosition, Zoom } from "ol/control";
+import { FullScreen, MousePosition, Zoom } from "ol/control";
 import { Coordinate, format } from "ol/coordinate";
 
 import "../../public/css/mapControllers.css";
@@ -20,4 +20,10 @@ export const positionCurseurController = new MousePosition({
     );
   },
   projection: "EPSG:4326",
+});
+
+export const fullScreenController = new FullScreen({
+  className: "map_controllers_full_screen",
+  activeClassName: "map_controllers_full_screen_active",
+  inactiveClassName: "map_controllers_full_screen_inactive",
 });
