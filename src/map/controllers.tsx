@@ -2,7 +2,6 @@ import { MousePosition, Zoom } from "ol/control";
 import { Coordinate, format } from "ol/coordinate";
 
 import "../../public/css/mapControllers.css";
-// import "./controllers.module.css";
 
 export const zoomController = new Zoom({
   zoomInTipLabel: "Zoomer",

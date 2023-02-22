@@ -10,16 +10,21 @@ import BaseLayer from "ol/layer/Base";
 import { zoomController, positionCurseurController } from "../map/controllers";
 import { getIgnWMTSTileLayer, aiPredictionLayer } from "../map/ignTileLayer";
 
-type Layer = "planIGN" | "ortho" | "admin" | "aiPrediction";
+export type AvailableLayer = "planIGN" | "ortho" | "admin" | "aiPrediction";
 
-const LAYER_TO_OPENLAYER_LAYER: { [key in Layer]: BaseLayer } = {
+const LAYER_TO_OPENLAYER_LAYER: { [key in AvailableLayer]: BaseLayer } = {
   "planIGN": getIgnWMTSTileLayer("GEOGRAPHICALGRIDSYSTEMS.PLANIGNV2"),
   "ortho": getIgnWMTSTileLayer("ORTHOIMAGERY.ORTHOPHOTOS"),
   "admin": getIgnWMTSTileLayer("LIMITES_ADMINISTRATIVES_EXPRESS.LATEST"),
   "aiPrediction": aiPredictionLayer,
 };
 
-export const useMap = (target: string, center: [number, number], zoom: number, layers: Layer[]) => {
+export const useMap = (
+  target: string,
+  center: [number, number],
+  zoom: number,
+  layers: AvailableLayer[],
+) => {
   const [view, setView] = useState<View | undefined>(undefined);
   const [map, setMap] = useState<Map | undefined>(undefined);
 
@@ -62,7 +67,7 @@ export const useMap = (target: string, center: [number, number], zoom: number, l
     map?.addLayer(layer);
   };
 
-  const setLayerOpacity = (layer: Layer, opacityValue: number) => {
+  const setLayerOpacity = (layer: AvailableLayer, opacityValue: number) => {
     const ol_layer = LAYER_TO_OPENLAYER_LAYER[layer];
     ol_layer.setOpacity(opacityValue);
   };
