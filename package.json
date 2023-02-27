@@ -1,6 +1,6 @@
 {
   "name": "geocommuns-core",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Set of shared utilities (hooks and Components) for the geocommuns project",
   "repository": {
     "type": "git",
@@ -9,7 +9,6 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "test": "echo DODO",
     "build": "tsc && yarn copy-css",
     "copy-css": "copyfiles -u 1 src/**/*.css dist/",
     "lint:check": "eslint . --ext .ts,.tsx",
