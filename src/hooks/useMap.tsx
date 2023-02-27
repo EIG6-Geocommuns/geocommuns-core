@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Feature, Map, View } from "ol";
 import { fromLonLat, Projection } from "ol/proj";
 import { Polygon } from "ol/geom";
@@ -6,8 +6,10 @@ import { Coordinate } from "ol/coordinate";
 import { Vector as VectorLayer } from "ol/layer";
 import VectorSource from "ol/source/Vector";
 import BaseLayer from "ol/layer/Base";
+import { makeStyles } from "tss-react/dsfr";
 
-import { zoomController, fullScreenController } from "../map/controllers";
+import { createZoomController, createFullScreenController } from "../map/controllers";
+
 import { getIgnWMTSTileLayer, aiPredictionLayer } from "../map/ignTileLayer";
 
 export type AvailableLayer = "planIGN" | "ortho" | "admin" | "aiPrediction";
@@ -19,12 +21,73 @@ const LAYER_TO_OPENLAYER_LAYER: { [key in AvailableLayer]: BaseLayer } = {
   "aiPrediction": aiPredictionLayer,
 };
 
+const useStyles = makeStyles()(() => ({
+  zoomContainer: {
+    display: "flex",
+    justifyContent: "flex-end",
+    height: "100%",
+    position: "absolute",
+    bottom: 0,
+    right: 0,
+    flexDirection: "column",
+    margin: 30, //TODO: change with fr.spacing
+  },
+  mapControllersZoomInButton: {
+    height: 40,
+    width: 40,
+    borderRadius: "8px 8px 0px 0px",
+    backgroundColor: "white",
+    fontSize: "x-large",
+    color: "#000091",
+    border: "1px solid #000091",
+  },
+  mapControllersZoomOutButton: {
+    height: 40, //TODO: change with fr.spacing
+    width: 40,
+    borderRadius: "0px 0px 8px 8px",
+    backgroundColor: "white",
+    fontSize: "x-large",
+    color: "#000091",
+    border: "1px solid #000091",
+  },
+  fullScreenContainer: {
+    display: "flex",
+    justifyContent: "flex-end",
+    height: "100%",
+    position: "absolute",
+    bottom: 0,
+    right: 0,
+    flexDirection: "column",
+    margin: 30,
+    marginBottom: 118, //TODO: change with fr.spacing
+    borderRadius: 8,
+    color: "#000091", //TODO use dsfr
+  },
+  activateFullScreen: {
+    height: 40,
+    width: 40,
+    borderRadius: 8,
+    backgroundColor: "white",
+    fontSize: "large",
+    border: "1px solid #000091",
+  },
+  inactivateFullScreen: {
+    height: 40,
+    width: 40,
+    borderRadius: 8,
+    backgroundColor: "white",
+    fontSize: "large",
+    border: "1px solid #000091",
+  },
+}));
+
 export const useMap = (
   target: string,
   center: [number, number],
   zoom: number,
   layers: AvailableLayer[],
 ) => {
+  const { classes } = useStyles();
   const [view, setView] = useState<View | undefined>(undefined);
   const [map, setMap] = useState<Map | undefined>(undefined);
 
@@ -34,6 +97,26 @@ export const useMap = (
     zoom,
     center: fromLonLat(center),
   });
+
+  const zoomController = useMemo(
+    () =>
+      createZoomController({
+        className: classes.zoomContainer,
+        zoomInClassName: classes.mapControllersZoomInButton,
+        zoomOutClassName: classes.mapControllersZoomOutButton,
+      }),
+    [classes],
+  );
+
+  const fullScreenController = useMemo(
+    () =>
+      createFullScreenController({
+        className: classes.fullScreenContainer,
+        activeClassName: classes.activateFullScreen,
+        inactiveClassName: classes.inactivateFullScreen,
+      }),
+    [classes],
+  );
 
   useEffect(() => {
     const map = new Map({
