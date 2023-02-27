@@ -11,6 +11,7 @@ import { makeStyles } from "tss-react/dsfr";
 import { createZoomController, createFullScreenController } from "../map/controllers";
 
 import { getIgnWMTSTileLayer, aiPredictionLayer } from "../map/ignTileLayer";
+import { fr } from "@codegouvfr/react-dsfr";
 
 export type AvailableLayer = "planIGN" | "ortho" | "admin" | "aiPrediction";
 
@@ -30,11 +31,11 @@ const useStyles = makeStyles()(() => ({
     bottom: 0,
     right: 0,
     flexDirection: "column",
-    margin: 30, //TODO: change with fr.spacing
+    margin: fr.spacing("4w"),
   },
   mapControllersZoomInButton: {
-    height: 40,
-    width: 40,
+    height: fr.spacing("5w"),
+    width: fr.spacing("5w"),
     borderRadius: "8px 8px 0px 0px",
     backgroundColor: "white",
     fontSize: "x-large",
@@ -42,8 +43,8 @@ const useStyles = makeStyles()(() => ({
     border: "1px solid #000091",
   },
   mapControllersZoomOutButton: {
-    height: 40, //TODO: change with fr.spacing
-    width: 40,
+    height: fr.spacing("5w"),
+    width: fr.spacing("5w"),
     borderRadius: "0px 0px 8px 8px",
     backgroundColor: "white",
     fontSize: "x-large",
@@ -58,22 +59,22 @@ const useStyles = makeStyles()(() => ({
     bottom: 0,
     right: 0,
     flexDirection: "column",
-    margin: 30,
-    marginBottom: 118, //TODO: change with fr.spacing
+    margin: fr.spacing("4w"),
+    marginBottom: fr.spacing("15w"),
     borderRadius: 8,
     color: "#000091", //TODO use dsfr
   },
   activateFullScreen: {
-    height: 40,
-    width: 40,
+    height: fr.spacing("5w"),
+    width: fr.spacing("5w"),
     borderRadius: 8,
     backgroundColor: "white",
     fontSize: "large",
     border: "1px solid #000091",
   },
   inactivateFullScreen: {
-    height: 40,
-    width: 40,
+    height: fr.spacing("5w"),
+    width: fr.spacing("5w"),
     borderRadius: 8,
     backgroundColor: "white",
     fontSize: "large",

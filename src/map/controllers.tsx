@@ -1,8 +1,6 @@
 import { FullScreen, MousePosition, Zoom } from "ol/control";
 import { Coordinate, format } from "ol/coordinate";
 
-import "./mapControllers.css";
-
 export const createZoomController = (
   params: Record<"className" | "zoomInClassName" | "zoomOutClassName", string>,
 ) => {

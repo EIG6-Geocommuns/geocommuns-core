@@ -49,7 +49,7 @@ cd geocommuns-core
 yarn
 yarn build
 yarn link-in-main-project lidarviz-front predictia_front
-npx tsc -w
+yarn dev
 
 # Open another terminal
 
