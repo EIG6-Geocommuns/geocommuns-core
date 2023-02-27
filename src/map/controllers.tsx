@@ -1,7 +1,7 @@
 import { FullScreen, MousePosition, Zoom } from "ol/control";
 import { Coordinate, format } from "ol/coordinate";
 
-import "../../public/css/mapControllers.css";
+import "./mapControllers.css";
 
 export const zoomController = new Zoom({
   zoomInTipLabel: "Zoomer",
