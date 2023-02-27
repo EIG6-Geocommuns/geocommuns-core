@@ -9,6 +9,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
+    "test": "echo DODO",
     "build": "tsc && yarn copy-css",
     "copy-css": "copyfiles -u 1 src/**/*.css dist/",
     "lint:check": "eslint . --ext .ts,.tsx",
