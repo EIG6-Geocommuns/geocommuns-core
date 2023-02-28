@@ -26,7 +26,7 @@ const LAYER_TO_OPENLAYER_LAYER: { [key in AvailableLayer]: BaseLayer } = {
 
 const lightTheme = fr.getColors(false);
 
-const useStyles = makeStyles()({
+const useStyles = makeStyles({ name: "Map" })({
   zoomContainer: {
     position: "absolute",
     display: "flex",
