@@ -93,15 +93,18 @@ export const useMap = (
   layers: AvailableLayer[],
 ) => {
   const { classes } = useStyles();
-  const [view, setView] = useState<View | undefined>(undefined);
   const [map, setMap] = useState<Map | undefined>(undefined);
 
   const mapLayers = layers.map(layer => LAYER_TO_OPENLAYER_LAYER[layer]);
 
-  const initialView = new View({
-    zoom,
-    center: fromLonLat(center),
-  });
+  const view = useMemo(
+    () =>
+      new View({
+        zoom,
+        center: fromLonLat(center),
+      }),
+    [zoom, center],
+  );
 
   const zoomController = useMemo(
     () =>
@@ -127,18 +130,17 @@ export const useMap = (
     const map = new Map({
       target,
       layers: mapLayers,
-      view: initialView,
+      view: view,
       controls: [zoomController, fullScreenController],
     });
     setMap(map);
-    setView(initialView);
 
     return () => map.setTarget(undefined);
   }, []);
 
   const setNewCenterAndNewZoom = (coordinates: [number, number], zoom: number) => {
-    view?.setCenter(fromLonLat(coordinates));
-    view?.setZoom(zoom);
+    view.setCenter(fromLonLat(coordinates));
+    view.setZoom(zoom);
   };
 
   const fitViewToPolygon = (coordinates: Coordinate[][]) => {
@@ -147,7 +149,7 @@ export const useMap = (
     // TODO handle multi-polygon like Marseille
     const polygon = new Polygon(coordinates).transform(epsg4326, epsg3857);
 
-    view?.fit(polygon as Polygon, { padding: [150, 150, 150, 150] });
+    view.fit(polygon as Polygon, { padding: [150, 150, 150, 150] });
 
     const feature = new Feature(polygon);
     const vectorSource = new VectorSource({ features: [feature] });
