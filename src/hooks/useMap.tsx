@@ -22,7 +22,9 @@ const LAYER_TO_OPENLAYER_LAYER: { [key in AvailableLayer]: BaseLayer } = {
   "aiPrediction": aiPredictionLayer,
 };
 
-const useStyles = makeStyles()(theme => ({
+const lightTheme = fr.getColors(false);
+
+const useStyles = makeStyles()({
   zoomContainer: {
     position: "absolute",
     display: "flex",
@@ -37,20 +39,20 @@ const useStyles = makeStyles()(theme => ({
     height: fr.spacing("5w"),
     width: fr.spacing("5w"),
     fontSize: "x-large",
-    color: theme.decisions.background.actionHigh.blueFrance.default,
-    backgroundColor: theme.decisions.artwork.background.grey.default,
+    color: lightTheme.decisions.background.actionHigh.blueFrance.default,
+    backgroundColor: lightTheme.decisions.artwork.background.grey.default,
     border: "1px solid",
-    borderColor: theme.decisions.background.actionHigh.blueFrance.default,
+    borderColor: lightTheme.decisions.background.actionHigh.blueFrance.default,
     borderRadius: "8px 8px 0px 0px",
   },
   mapControllersZoomOutButton: {
     height: fr.spacing("5w"),
     width: fr.spacing("5w"),
     fontSize: "x-large",
-    color: theme.decisions.background.actionHigh.blueFrance.default,
-    backgroundColor: theme.decisions.artwork.background.grey.default,
+    color: lightTheme.decisions.background.actionHigh.blueFrance.default,
+    backgroundColor: lightTheme.decisions.artwork.background.grey.default,
     border: "1px solid",
-    borderColor: theme.decisions.background.actionHigh.blueFrance.default,
+    borderColor: lightTheme.decisions.background.actionHigh.blueFrance.default,
     borderRadius: "0px 0px 8px 8px",
   },
   fullScreenContainer: {
@@ -63,28 +65,28 @@ const useStyles = makeStyles()(theme => ({
     right: 0,
     margin: fr.spacing("4w"),
     marginBottom: fr.spacing("15w"),
-    color: theme.decisions.background.actionHigh.blueFrance.default,
-    borderRadius: 8,
+    color: lightTheme.decisions.background.actionHigh.blueFrance.default,
+    borderRadius: 8, //NOTE: Border radius isn't DSFR compliant
   },
   activateFullScreen: {
     height: fr.spacing("5w"),
     width: fr.spacing("5w"),
     fontSize: "large",
-    backgroundColor: theme.decisions.artwork.background.grey.default,
+    backgroundColor: lightTheme.decisions.artwork.background.grey.default,
     border: "1px solid",
-    borderColor: theme.decisions.background.actionHigh.blueFrance.default,
+    borderColor: lightTheme.decisions.background.actionHigh.blueFrance.default,
     borderRadius: 8,
   },
   inactivateFullScreen: {
     height: fr.spacing("5w"),
     width: fr.spacing("5w"),
     fontSize: "large",
-    backgroundColor: theme.decisions.artwork.background.grey.default,
+    backgroundColor: lightTheme.decisions.artwork.background.grey.default,
     border: "1px solid",
-    borderColor: theme.decisions.background.actionHigh.blueFrance.default,
+    borderColor: lightTheme.decisions.background.actionHigh.blueFrance.default,
     borderRadius: 8,
   },
-}));
+});
 
 export const useMap = (
   target: string,
