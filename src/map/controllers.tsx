@@ -1,15 +1,15 @@
 import { FullScreen, MousePosition, Zoom } from "ol/control";
 import { Coordinate, format } from "ol/coordinate";
 
-import "./mapControllers.css";
-
-export const zoomController = new Zoom({
-  zoomInTipLabel: "Zoomer",
-  zoomOutTipLabel: "Dézoomer",
-  className: "map_controllers_zoom",
-  zoomInClassName: "map_controllers_zoom_in_button",
-  zoomOutClassName: "map_controllers_zoom_out_button",
-});
+export const createZoomController = (
+  params: Record<"className" | "zoomInClassName" | "zoomOutClassName", string>,
+) => {
+  return new Zoom({
+    zoomInTipLabel: "Zoomer",
+    zoomOutTipLabel: "Dézoomer",
+    ...params,
+  });
+};
 
 export const positionCurseurController = new MousePosition({
   coordinateFormat: function (coordinate: Coordinate | undefined) {
@@ -22,8 +22,8 @@ export const positionCurseurController = new MousePosition({
   projection: "EPSG:4326",
 });
 
-export const fullScreenController = new FullScreen({
-  className: "map_controllers_full_screen",
-  activeClassName: "map_controllers_full_screen_active",
-  inactiveClassName: "map_controllers_full_screen_inactive",
-});
+export const createFullScreenController = (
+  params: Record<"className" | "activeClassName" | "inactiveClassName", string>,
+) => {
+  return new FullScreen({ ...params });
+};
