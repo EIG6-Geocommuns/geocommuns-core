@@ -1885,7 +1885,7 @@ ts-node@^10.9.1:
     v8-compile-cache-lib "^3.0.1"
     yn "3.1.1"
 
-tsafe@^1.4.0:
+tsafe@^1.4.0, tsafe@^1.4.3:
   version "1.4.3"
   resolved "https://registry.yarnpkg.com/tsafe/-/tsafe-1.4.3.tgz#a98ce83616f0d9c01e3c6167a2ead45ba455b2ae"
   integrity sha512-KjCdgjIqsbKW9oeJGSMVC23jhWm/VXJwkaZ7jffo/WaTioLGTHJqliHe9dECEVzIACNVNs/fwtKwU8wWK4jY4g==
