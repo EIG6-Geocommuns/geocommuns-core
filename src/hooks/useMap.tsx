@@ -7,6 +7,8 @@ import { Vector as VectorLayer } from "ol/layer";
 import VectorSource from "ol/source/Vector";
 import BaseLayer from "ol/layer/Base";
 import { makeStyles } from "tss-react/dsfr";
+import { assert } from "tsafe/assert";
+import { useConstCallback } from "powerhooks/useConstCallback";
 
 import { createZoomController, createFullScreenController } from "../map/controllers";
 
@@ -95,9 +97,8 @@ export const useMap = (
   layers: AvailableLayer[],
 ) => {
   const { classes } = useStyles();
-  const [map, setMap] = useState<Map | undefined>(undefined);
 
-  const mapLayers = layers.map(layer => LAYER_TO_OPENLAYER_LAYER[layer]);
+  const mapLayers = useMemo(() => layers.map(layer => LAYER_TO_OPENLAYER_LAYER[layer]), [layers]);
 
   const view = useMemo(
     () =>
@@ -128,24 +129,39 @@ export const useMap = (
     [classes],
   );
 
-  useEffect(() => {
-    const map = new Map({
-      target,
-      layers: mapLayers,
-      view: view,
-      controls: [zoomController, fullScreenController],
-    });
-    setMap(map);
+  //Tu utilise un useEffect au lieu d'un useMemo donc j'imagine que
+  // l'instanciation de la map est trop lourde pour être fait dans le
+  // tick de render? Right?
+  // Si c'est le cas c'est mieux d'encapsuler la logic de l'instantiation
+  // de la map dans une closure.
+  const { map } = (function useClosure() {
+    const [map, setMap] = useState<Map | undefined>(undefined);
 
-    return () => map.setTarget(undefined);
-  }, []);
+    useEffect(() => {
+      const map = new Map({
+        target,
+        layers: mapLayers,
+        view,
+        controls: [zoomController, fullScreenController],
+      });
 
-  const setNewCenterAndNewZoom = (coordinates: [number, number], zoom: number) => {
+      setMap(map);
+
+      return () => map.setTarget(undefined);
+    }, [zoomController, fullScreenController, mapLayers, view, target]);
+
+    return { map };
+  })();
+
+  // C'est beaucoup mieux de renvoyer des fonctions dont la référence ne change pas a chaque render
+  // ça évite des re-render inutile downstream.
+  // voir: https://docs.onyxia.sh/contributing/onyxia/dependencies#avoiding-useless-re-render-of-components
+  const setNewCenterAndNewZoom = useConstCallback((coordinates: [number, number], zoom: number) => {
     view.setCenter(fromLonLat(coordinates));
     view.setZoom(zoom);
-  };
+  });
 
-  const fitViewToPolygon = (coordinates: Coordinate[][]) => {
+  const fitViewToPolygon = useConstCallback((coordinates: Coordinate[][]) => {
     const epsg4326 = new Projection({ code: "EPSG:4326" });
     const epsg3857 = new Projection({ code: "EPSG:3857" });
     // TODO handle multi-polygon like Marseille
@@ -156,13 +172,21 @@ export const useMap = (
     const feature = new Feature(polygon);
     const vectorSource = new VectorSource({ features: [feature] });
     const layer = new VectorLayer({ source: vectorSource });
-    map?.addLayer(layer);
-  };
 
-  const setLayerOpacity = (layer: AvailableLayer, opacityValue: number) => {
+    //Il ne faut pas utiliser le ? ici, il faut que tu assert que ta map n'es pas
+    //undefined ou alors planter.  J'utilise tsafe mait tu peut aussi juste lancer une exception.
+    assert(
+      map !== undefined,
+      "The map object should have been instantiated (it is after fist render) by the time this function is called",
+    );
+
+    map.addLayer(layer);
+  });
+
+  const setLayerOpacity = useConstCallback((layer: AvailableLayer, opacityValue: number) => {
     const ol_layer = LAYER_TO_OPENLAYER_LAYER[layer];
     ol_layer.setOpacity(opacityValue);
-  };
+  });
 
   return { setNewCenterAndNewZoom, fitViewToPolygon, setLayerOpacity };
 };
