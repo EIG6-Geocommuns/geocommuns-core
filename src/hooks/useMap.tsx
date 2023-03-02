@@ -95,6 +95,7 @@ export const useMap = (
   layers: AvailableLayer[],
 ) => {
   const { classes } = useStyles();
+  const [map, setMap] = useState<Map | undefined>(undefined);
 
   const mapLayers = useMemo(() => layers.map(layer => LAYER_TO_OPENLAYER_LAYER[layer]), [layers]);
 
@@ -127,26 +128,18 @@ export const useMap = (
     [classes],
   );
 
-  const instantiateMap = () => {
-    const [map, setMap] = useState<Map | undefined>(undefined);
+  useEffect(() => {
+    const map = new Map({
+      target,
+      layers: mapLayers,
+      view,
+      controls: [zoomController, fullScreenController],
+    });
 
-    useEffect(() => {
-      const map = new Map({
-        target,
-        layers: mapLayers,
-        view,
-        controls: [zoomController, fullScreenController],
-      });
+    setMap(map);
 
-      setMap(map);
-
-      return () => map.setTarget(undefined);
-    }, [zoomController, fullScreenController, mapLayers, view, target]);
-
-    return { map };
-  };
-
-  const { map } = instantiateMap();
+    return () => map.setTarget(undefined);
+  }, []);
 
   const setNewCenterAndNewZoom = useCallback((coordinates: [number, number], zoom: number) => {
     view.setCenter(fromLonLat(coordinates));
