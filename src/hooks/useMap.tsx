@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Feature, Map, View } from "ol";
 import { fromLonLat, Projection } from "ol/proj";
 import { Polygon } from "ol/geom";
@@ -9,6 +9,7 @@ import BaseLayer from "ol/layer/Base";
 import { makeStyles } from "tss-react/dsfr";
 import { assert } from "tsafe/assert";
 import { fr } from "@codegouvfr/react-dsfr";
+import { useConstCallback } from "powerhooks/useConstCallback";
 
 import { createZoomController, createFullScreenController } from "../map/controllers";
 import { getIgnWMTSTileLayer, aiPredictionLayer } from "../map/ignTileLayer";
@@ -141,38 +142,35 @@ export const useMap = (
     return () => map.setTarget(undefined);
   }, []);
 
-  const setNewCenterAndNewZoom = useCallback((coordinates: [number, number], zoom: number) => {
+  const setNewCenterAndNewZoom = useConstCallback((coordinates: [number, number], zoom: number) => {
     view.setCenter(fromLonLat(coordinates));
     view.setZoom(zoom);
-  }, []);
+  });
 
-  const fitViewToPolygon = useCallback(
-    (coordinates: Coordinate[][]) => {
-      const epsg4326 = new Projection({ code: "EPSG:4326" });
-      const epsg3857 = new Projection({ code: "EPSG:3857" });
-      // TODO handle multi-polygon like Marseille
-      const polygon = new Polygon(coordinates).transform(epsg4326, epsg3857);
+  const fitViewToPolygon = useConstCallback((coordinates: Coordinate[][]) => {
+    const epsg4326 = new Projection({ code: "EPSG:4326" });
+    const epsg3857 = new Projection({ code: "EPSG:3857" });
+    // TODO handle multi-polygon like Marseille
+    const polygon = new Polygon(coordinates).transform(epsg4326, epsg3857);
 
-      view.fit(polygon as Polygon, { padding: [150, 150, 150, 150] });
+    view.fit(polygon as Polygon, { padding: [150, 150, 150, 150] });
 
-      const feature = new Feature(polygon);
-      const vectorSource = new VectorSource({ features: [feature] });
-      const layer = new VectorLayer({ source: vectorSource });
+    const feature = new Feature(polygon);
+    const vectorSource = new VectorSource({ features: [feature] });
+    const layer = new VectorLayer({ source: vectorSource });
 
-      assert(
-        map !== undefined,
-        "The map object should have been instantiated (it is after fist render) by the time this function is called",
-      );
+    assert(
+      map !== undefined,
+      "The map object should have been instantiated (it is after fist render) by the time this function is called",
+    );
 
-      map.addLayer(layer);
-    },
-    [map],
-  );
+    map.addLayer(layer);
+  });
 
-  const setLayerOpacity = useCallback((layer: AvailableLayer, opacityValue: number) => {
+  const setLayerOpacity = useConstCallback((layer: AvailableLayer, opacityValue: number) => {
     const ol_layer = LAYER_TO_OPENLAYER_LAYER[layer];
     ol_layer.setOpacity(opacityValue);
-  }, []);
+  });
 
   return { setNewCenterAndNewZoom, fitViewToPolygon, setLayerOpacity };
 };
