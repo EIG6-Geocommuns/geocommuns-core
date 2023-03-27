@@ -17,7 +17,7 @@ const useStyles = makeStyles()(theme => ({
 
 export const Root = ({ title }: Props): JSX.Element => {
   const { classes } = useStyles();
-  const brandTop = <>GOUVERNEMENT</>;
+  const brandTop = <>ign.fr</>;
 
   const homeLinkProps = {
     to: "/",
