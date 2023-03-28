@@ -6,18 +6,28 @@ import { makeStyles } from "tss-react/dsfr";
 
 type Props = {
   title: string;
+  contactMail: string;
+  contentDescription?: string;
 };
 
 const useStyles = makeStyles()(theme => ({
   disabled: {
     pointerEvents: "none",
-    color: theme.decisions.text.disabled.grey.default + " !important",
+    "&&": {
+      color: theme.decisions.text.disabled.grey.default,
+    },
   },
 }));
 
-export const Root = ({ title }: Props): JSX.Element => {
+export const Root = ({ title, contactMail, contentDescription }: Props): JSX.Element => {
   const { classes } = useStyles();
-  const brandTop = <>ign.fr</>;
+  const brandTop = (
+    <>
+      République
+      <br />
+      Française
+    </>
+  );
 
   const homeLinkProps = {
     to: "/",
@@ -49,9 +59,9 @@ export const Root = ({ title }: Props): JSX.Element => {
           {
             iconId: "ri-mail-line",
             linkProps: {
-              href: "#",
+              href: `mailto:${contactMail}`,
             },
-            text: "Nous contacter",
+            text: "Nous contacter ?",
           },
         ]}
         serviceTagline="Prototype - Version1 - 2023"
@@ -63,11 +73,7 @@ export const Root = ({ title }: Props): JSX.Element => {
         accessibility="non compliant"
         brandTop={brandTop}
         homeLinkProps={homeLinkProps}
-        contentDescription="Ce message est à remplacer par les informations de votre site.
-          Comme exemple de contenu, vous pouvez indiquer les informations 
-          suivantes : Le site officiel d’information administrative pour les entreprises.
-          Retrouvez toutes les informations et démarches administratives nécessaires à la création, 
-          à la gestion et au développement de votre entreprise."
+        contentDescription={contentDescription}
         personalDataLinkProps={{ href: "#" }}
         termsLinkProps={{ href: "#" }}
         websiteMapLinkProps={{ href: "#" }}

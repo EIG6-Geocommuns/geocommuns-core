@@ -45,7 +45,7 @@
   "keywords": [],
   "homepage": "https://github.com/EIG6-Geocommuns/geocommuns-core",
   "peerDependencies": {
-    "@codegouvfr/react-dsfr": "^0.39.0",
+    "@codegouvfr/react-dsfr": "^0.43.3",
     "@emotion/react": "^11.10.5",
     "ol": "^7.1.0",
     "react": "*",
@@ -53,7 +53,7 @@
     "tss-react": "^4.6.1"
   },
   "devDependencies": {
-    "@codegouvfr/react-dsfr": "^0.39.0",
+    "@codegouvfr/react-dsfr": "^0.43.3",
     "@emotion/react": "^11.10.5",
     "@types/node": "^18.13.0",
     "@types/openlayers": "^4.6.18",
