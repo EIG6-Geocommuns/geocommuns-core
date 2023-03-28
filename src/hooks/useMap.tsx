@@ -11,7 +11,11 @@ import { assert } from "tsafe/assert";
 import { fr } from "@codegouvfr/react-dsfr";
 import { useConstCallback } from "powerhooks/useConstCallback";
 
-import { createZoomController, createFullScreenController } from "../map/controllers";
+import {
+  createZoomController,
+  createFullScreenController,
+  scaleLineController,
+} from "../map/controllers";
 import { getIgnWMTSTileLayer, aiPredictionLayer } from "../map/ignTileLayer";
 
 export type AvailableLayer = "planIGN" | "ortho" | "admin" | "aiPrediction";
@@ -116,7 +120,7 @@ export const useMap = (
       target,
       layers: mapLayers,
       view,
-      controls: [zoomController, fullScreenController],
+      controls: [zoomController, fullScreenController, scaleLineController],
     });
 
     setMap(map);
