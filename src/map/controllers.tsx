@@ -22,8 +22,10 @@ export const positionCurseurController = new MousePosition({
   projection: "EPSG:4326",
 });
 
-export const createFullScreenController = (
-  params: Record<"className" | "activeClassName" | "inactiveClassName", string>,
-) => {
+export const createFullScreenController = (params: {
+  className: string;
+  activeClassName?: string;
+  inactiveClassName?: string;
+}) => {
   return new FullScreen({ ...params });
 };

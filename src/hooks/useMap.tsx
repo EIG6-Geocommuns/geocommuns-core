@@ -36,7 +36,7 @@ const useStyles = makeStyles({ name: "Map" })({
     right: 0,
     margin: fr.spacing("4w"),
   },
-  mapControllersZoomInButton: {
+  mapControllersZoomButton: {
     height: fr.spacing("5w"),
     width: fr.spacing("5w"),
     fontSize: "x-large",
@@ -44,48 +44,31 @@ const useStyles = makeStyles({ name: "Map" })({
     backgroundColor: lightTheme.decisions.artwork.background.grey.default,
     border: "1px solid",
     borderColor: lightTheme.decisions.background.actionHigh.blueFrance.default,
-    borderRadius: "8px 8px 0px 0px",
-  },
-  mapControllersZoomOutButton: {
-    height: fr.spacing("5w"),
-    width: fr.spacing("5w"),
-    fontSize: "x-large",
-    color: lightTheme.decisions.background.actionHigh.blueFrance.default,
-    backgroundColor: lightTheme.decisions.artwork.background.grey.default,
-    border: "1px solid",
-    borderColor: lightTheme.decisions.background.actionHigh.blueFrance.default,
-    borderRadius: "0px 0px 8px 8px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   },
   fullScreenContainer: {
     position: "absolute",
     display: "flex",
-    flexDirection: "column",
-    justifyContent: "flex-end",
+    flexDirection: "row",
     height: "100%",
     bottom: 0,
     right: 0,
-    margin: fr.spacing("4w"),
-    marginBottom: fr.spacing("15w"),
     color: lightTheme.decisions.background.actionHigh.blueFrance.default,
-    borderRadius: 8,
-  },
-  activateFullScreen: {
-    height: fr.spacing("5w"),
-    width: fr.spacing("5w"),
-    fontSize: "large",
-    backgroundColor: lightTheme.decisions.artwork.background.grey.default,
-    border: "1px solid",
-    borderColor: lightTheme.decisions.background.actionHigh.blueFrance.default,
-    borderRadius: 8,
+    "& > button": {
+      height: fr.spacing("5w"),
+      width: fr.spacing("5w"),
+      fontSize: "large",
+      backgroundColor: lightTheme.decisions.artwork.background.grey.default,
+      border: "1px solid",
+      borderColor: lightTheme.decisions.background.actionHigh.blueFrance.default,
+      margin: fr.spacing("4w"),
+      marginBottom: fr.spacing("15w"),
+    },
   },
   inactivateFullScreen: {
-    height: fr.spacing("5w"),
-    width: fr.spacing("5w"),
-    fontSize: "large",
-    backgroundColor: lightTheme.decisions.artwork.background.grey.default,
-    border: "1px solid",
-    borderColor: lightTheme.decisions.background.actionHigh.blueFrance.default,
-    borderRadius: 8,
+    alignSelf: "flex-end",
   },
 });
 
@@ -113,8 +96,8 @@ export const useMap = (
     () =>
       createZoomController({
         className: classes.zoomContainer,
-        zoomInClassName: classes.mapControllersZoomInButton,
-        zoomOutClassName: classes.mapControllersZoomOutButton,
+        zoomInClassName: classes.mapControllersZoomButton,
+        zoomOutClassName: classes.mapControllersZoomButton,
       }),
     [classes],
   );
@@ -123,7 +106,6 @@ export const useMap = (
     () =>
       createFullScreenController({
         className: classes.fullScreenContainer,
-        activeClassName: classes.activateFullScreen,
         inactiveClassName: classes.inactivateFullScreen,
       }),
     [classes],

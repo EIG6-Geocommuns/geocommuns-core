@@ -61,7 +61,7 @@ export const Root = ({ title, contactMail, contentDescription }: Props): JSX.Ele
             linkProps: {
               href: `mailto:${contactMail}`,
             },
-            text: "Nous contacter ?",
+            text: "Nous contacter",
           },
         ]}
         serviceTagline="Prototype - Version1 - 2023"
