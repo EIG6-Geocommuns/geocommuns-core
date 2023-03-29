@@ -138,7 +138,8 @@ export const useMap = (
 
   const controls = useMemo(() => {
     const controlsList: Control[] = [fullScreenController, scaleLineController];
-    if (isMobile) controlsList.push(zoomController);
+    if (!isMobile) controlsList.push(zoomController);
+
     return controlsList;
   }, [fullScreenController, scaleLineController, zoomController, isMobile]);
 
