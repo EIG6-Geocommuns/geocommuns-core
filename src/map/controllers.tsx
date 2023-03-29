@@ -1,4 +1,4 @@
-import { FullScreen, MousePosition, Zoom } from "ol/control";
+import { FullScreen, MousePosition, ScaleLine, Zoom } from "ol/control";
 import { Coordinate, format } from "ol/coordinate";
 
 export const createZoomController = (
@@ -28,4 +28,11 @@ export const createFullScreenController = (params: {
   inactiveClassName?: string;
 }) => {
   return new FullScreen({ ...params });
+};
+
+export const createScaleLineController = (params: { className?: string; minWidth?: number }) => {
+  const control = new ScaleLine({
+    ...params,
+  });
+  return control;
 };

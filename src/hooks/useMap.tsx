@@ -1,18 +1,25 @@
-import { useEffect, useMemo, useState } from "react";
-import { Feature, Map, View } from "ol";
-import { fromLonLat, Projection } from "ol/proj";
-import { Polygon } from "ol/geom";
-import { Coordinate } from "ol/coordinate";
-import { Vector as VectorLayer } from "ol/layer";
-import VectorSource from "ol/source/Vector";
-import BaseLayer from "ol/layer/Base";
-import { makeStyles } from "tss-react/dsfr";
-import { assert } from "tsafe/assert";
 import { fr } from "@codegouvfr/react-dsfr";
+import { Feature, Map, View } from "ol";
+import { Coordinate } from "ol/coordinate";
+import { Polygon } from "ol/geom";
+import { Vector as VectorLayer } from "ol/layer";
+import BaseLayer from "ol/layer/Base";
+import "ol/ol.css";
+import { fromLonLat, Projection } from "ol/proj";
+import VectorSource from "ol/source/Vector";
 import { useConstCallback } from "powerhooks/useConstCallback";
+import { useEffect, useMemo, useState } from "react";
+import { assert } from "tsafe/assert";
+import { makeStyles } from "tss-react/dsfr";
+import { isMobile } from "react-device-detect";
 
-import { createZoomController, createFullScreenController } from "../map/controllers";
-import { getIgnWMTSTileLayer, aiPredictionLayer } from "../map/ignTileLayer";
+import {
+  createFullScreenController,
+  createScaleLineController,
+  createZoomController,
+} from "../map/controllers";
+import { aiPredictionLayer, getIgnWMTSTileLayer } from "../map/ignTileLayer";
+import { Control } from "ol/control";
 
 export type AvailableLayer = "planIGN" | "ortho" | "admin" | "aiPrediction";
 
@@ -33,42 +40,54 @@ const useStyles = makeStyles({ name: "Map" })({
     justifyContent: "flex-end",
     height: "100%",
     bottom: 0,
-    right: 0,
-    margin: fr.spacing("4w"),
+    left: 0,
+    margin: fr.spacing("2w"),
+    marginBottom: fr.spacing("9w"),
+    backgroundColor: "transparent",
   },
   mapControllersZoomButton: {
-    height: fr.spacing("5w"),
-    width: fr.spacing("5w"),
-    fontSize: "x-large",
-    color: lightTheme.decisions.background.actionHigh.blueFrance.default,
-    backgroundColor: lightTheme.decisions.artwork.background.grey.default,
-    border: "1px solid",
-    borderColor: lightTheme.decisions.background.actionHigh.blueFrance.default,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
+    "&&": {
+      height: fr.spacing("5w"),
+      width: fr.spacing("5w"),
+      fontSize: "x-large",
+      color: lightTheme.decisions.background.actionHigh.blueFrance.default,
+      backgroundColor: lightTheme.decisions.artwork.background.grey.default,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+    },
   },
+  mapControllersZoomInButton: {
+    borderBottom: "1px solid",
+    borderColor: lightTheme.decisions.background.actionHigh.blueFrance.default,
+  },
+
   fullScreenContainer: {
     position: "absolute",
     display: "flex",
     flexDirection: "row",
     height: "100%",
     bottom: 0,
-    right: 0,
+    left: 0,
     color: lightTheme.decisions.background.actionHigh.blueFrance.default,
-    "& > button": {
+    backgroundColor: "transparent",
+    "&& > button": {
       height: fr.spacing("5w"),
       width: fr.spacing("5w"),
       fontSize: "large",
+      color: lightTheme.decisions.background.actionHigh.blueFrance.default,
       backgroundColor: lightTheme.decisions.artwork.background.grey.default,
-      border: "1px solid",
-      borderColor: lightTheme.decisions.background.actionHigh.blueFrance.default,
-      margin: fr.spacing("4w"),
-      marginBottom: fr.spacing("15w"),
+      margin: fr.spacing("2w"),
     },
   },
   inactivateFullScreen: {
     alignSelf: "flex-end",
+  },
+  scaleLine: {
+    bottom: fr.spacing("2w"),
+    right: fr.spacing("4w"),
+    left: "auto",
+    fontSize: "large",
   },
 });
 
@@ -78,7 +97,7 @@ export const useMap = (
   zoom: number,
   layers: AvailableLayer[],
 ) => {
-  const { classes } = useStyles();
+  const { classes, cx } = useStyles();
   const [map, setMap] = useState<Map | undefined>(undefined);
 
   const mapLayers = useMemo(() => layers.map(layer => LAYER_TO_OPENLAYER_LAYER[layer]), [layers]);
@@ -96,7 +115,7 @@ export const useMap = (
     () =>
       createZoomController({
         className: classes.zoomContainer,
-        zoomInClassName: classes.mapControllersZoomButton,
+        zoomInClassName: cx(classes.mapControllersZoomButton, classes.mapControllersZoomInButton),
         zoomOutClassName: classes.mapControllersZoomButton,
       }),
     [classes],
@@ -111,12 +130,24 @@ export const useMap = (
     [classes],
   );
 
+  const scaleLineController = useMemo(
+    () =>
+      createScaleLineController({ className: cx(classes.scaleLine, "ol-scale-line"), minWidth: 100 }),
+    [],
+  );
+
+  const controls = useMemo(() => {
+    const controlsList: Control[] = [fullScreenController, scaleLineController];
+    if (isMobile) controlsList.push(zoomController);
+    return controlsList;
+  }, [fullScreenController, scaleLineController, zoomController, isMobile]);
+
   useEffect(() => {
     const map = new Map({
       target,
       layers: mapLayers,
       view,
-      controls: [zoomController, fullScreenController],
+      controls,
     });
 
     setMap(map);
