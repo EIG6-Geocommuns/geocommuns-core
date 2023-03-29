@@ -30,9 +30,8 @@ export const createFullScreenController = (params: {
   return new FullScreen({ ...params });
 };
 
-export const createScaleLineController = (params: { className?: string }) => {
+export const createScaleLineController = (params: { className?: string; minWidth?: number }) => {
   const control = new ScaleLine({
-    bar: true,
     ...params,
   });
   return control;

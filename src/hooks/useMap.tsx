@@ -85,6 +85,7 @@ const useStyles = makeStyles({ name: "Map" })({
     bottom: fr.spacing("2w"),
     right: fr.spacing("4w"),
     left: "auto",
+    fontSize: "large",
   },
 });
 
@@ -128,7 +129,8 @@ export const useMap = (
   );
 
   const scaleLineController = useMemo(
-    () => createScaleLineController({ className: cx(classes.scaleLine, "ol-scale-bar") }),
+    () =>
+      createScaleLineController({ className: cx(classes.scaleLine, "ol-scale-line"), minWidth: 100 }),
     [],
   );
 
@@ -137,7 +139,7 @@ export const useMap = (
       target,
       layers: mapLayers,
       view,
-      controls: [zoomController, fullScreenController, scaleLineController],
+      controls: [fullScreenController, zoomController, scaleLineController],
     });
 
     setMap(map);
