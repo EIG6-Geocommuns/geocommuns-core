@@ -2,7 +2,9 @@ import { makeStyles } from "tss-react/dsfr";
 import { fr } from "@codegouvfr/react-dsfr";
 import { ReactNode } from "react";
 
-const useStyles = makeStyles()(theme => ({
+const ligthTheme = fr.getColors(false);
+
+const useStyles = makeStyles()({
   titleBlock: {
     height: 520,
     display: "flex",
@@ -19,11 +21,11 @@ const useStyles = makeStyles()(theme => ({
     [fr.breakpoints.up("lg")]: { width: "50%" },
   },
   title: {
-    color: theme.decisions.text.inverted.grey.default,
+    color: ligthTheme.decisions.text.inverted.grey.default,
     fontSize: 64,
   },
   subtitle: {
-    color: theme.decisions.text.inverted.grey.default,
+    color: ligthTheme.decisions.text.inverted.grey.default,
     textAlign: "center",
     fontWeight: "bold",
     fontSize: 48,
@@ -31,7 +33,7 @@ const useStyles = makeStyles()(theme => ({
   },
   titleInfo: {
     fontVariantCaps: "all-small-caps",
-    color: theme.decisions.text.inverted.grey.default,
+    color: ligthTheme.decisions.text.inverted.grey.default,
     textAlign: "center",
     fontWeight: "bold",
     fontSize: 20,
@@ -60,7 +62,7 @@ const useStyles = makeStyles()(theme => ({
   iconButton: {
     marginLeft: fr.spacing("1w"),
   },
-}));
+});
 
 type Props = {
   title: string;
