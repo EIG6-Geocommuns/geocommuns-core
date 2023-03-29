@@ -11,6 +11,7 @@ import { useConstCallback } from "powerhooks/useConstCallback";
 import { useEffect, useMemo, useState } from "react";
 import { assert } from "tsafe/assert";
 import { makeStyles } from "tss-react/dsfr";
+import { isMobile } from "react-device-detect";
 
 import {
   createFullScreenController,
@@ -18,6 +19,7 @@ import {
   createZoomController,
 } from "../map/controllers";
 import { aiPredictionLayer, getIgnWMTSTileLayer } from "../map/ignTileLayer";
+import { Control } from "ol/control";
 
 export type AvailableLayer = "planIGN" | "ortho" | "admin" | "aiPrediction";
 
@@ -134,12 +136,18 @@ export const useMap = (
     [],
   );
 
+  const controls = useMemo(() => {
+    const controlsList: Control[] = [fullScreenController, scaleLineController];
+    if (isMobile) controlsList.push(zoomController);
+    return controlsList;
+  }, [fullScreenController, scaleLineController, zoomController, isMobile]);
+
   useEffect(() => {
     const map = new Map({
       target,
       layers: mapLayers,
       view,
-      controls: [fullScreenController, zoomController, scaleLineController],
+      controls,
     });
 
     setMap(map);
