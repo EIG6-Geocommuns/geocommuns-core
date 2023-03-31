@@ -7,6 +7,7 @@ import { makeStyles } from "tss-react/dsfr";
 type Props = {
   title: string;
   contactMail: string;
+  feedbackLink?: string;
   contentDescription?: string;
 };
 
@@ -19,7 +20,7 @@ const useStyles = makeStyles()(theme => ({
   },
 }));
 
-export const Root = ({ title, contactMail, contentDescription }: Props): JSX.Element => {
+export const Root = ({ title, contactMail, feedbackLink, contentDescription }: Props): JSX.Element => {
   const { classes } = useStyles();
   const brandTop = (
     <>
@@ -52,7 +53,7 @@ export const Root = ({ title, contactMail, contentDescription }: Props): JSX.Ele
           {
             iconId: "ri-chat-3-line",
             linkProps: {
-              href: "#",
+              href: feedbackLink || "#",
             },
             text: "Soumettre ses retours",
           },
