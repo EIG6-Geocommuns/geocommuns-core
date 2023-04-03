@@ -48,14 +48,14 @@ export const Root = ({ title, contactMail, feedbackLink, contentDescription }: P
               href: "#",
               className: classes.disabled,
             },
-            text: "Se connecter",
+            text: "Me connecter",
           },
           {
             iconId: "ri-chat-3-line",
             linkProps: {
               href: feedbackLink || "#",
             },
-            text: "Soumettre ses retours",
+            text: "Soumettre mes retours",
           },
           {
             iconId: "ri-mail-line",
