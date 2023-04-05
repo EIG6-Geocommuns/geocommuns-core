@@ -77,10 +77,20 @@ export const getIgnWMTSTileLayer = (layer: IGNLayers) => {
   return new TileLayer({ source });
 };
 
-const aiPredictionSource = new ImageWMS({
+// Here is GERS
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const gersPredictionSource = new ImageWMS({
   url: "https://wxs.ign.fr/ocsge/geoportail/r/wms",
   projection: EPSG3857,
   params: { WIDTH: "256", HEIGHT: "256", LAYERS: "OCSGE.VISU.2019" },
 });
 
-export const aiPredictionLayer = new ImageLayer({ source: aiPredictionSource });
+const rhoneAiPredictionSource = new ImageWMS({
+  url: "https://wxs.ign.fr/5jsuu4l5fobniiv05i5p54uk/geoportail/v/wms",
+  projection: EPSG3857,
+  params: { LAYERS: "COSIA" },
+});
+
+// Not used. To remove ?
+export const gersPredictionLayer = new ImageLayer({ source: gersPredictionSource });
+export const aiPredictionLayer = new ImageLayer({ source: rhoneAiPredictionSource });
