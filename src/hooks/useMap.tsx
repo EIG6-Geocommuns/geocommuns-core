@@ -186,5 +186,10 @@ export const useMap = (
     ol_layer.setOpacity(opacityValue);
   });
 
-  return { setNewCenterAndNewZoom, fitViewToPolygon, setLayerOpacity };
+  const setLayerVisibility = useConstCallback((layer: AvailableLayer, visibility: boolean) => {
+    const ol_layer = LAYER_TO_OPENLAYER_LAYER[layer];
+    ol_layer.setVisible(visibility);
+  });
+
+  return { setNewCenterAndNewZoom, fitViewToPolygon, setLayerOpacity, setLayerVisibility };
 };
