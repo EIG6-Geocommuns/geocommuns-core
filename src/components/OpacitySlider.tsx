@@ -15,10 +15,12 @@ const useStyles = makeStyles()({
   checkbox: {
     margin: 0,
     marginLeft: `-${fr.spacing("3v")}`,
+    "&& label": {
+      paddingBottom: 0,
+    },
   },
   slider: {
     width: "100%",
-    marginBottom: fr.spacing("3w"),
   },
 });
 
@@ -26,6 +28,7 @@ type Props = {
   label: string;
   setLayerOpacity(opacity: number): void;
   setLayerVisibility(visible: boolean): void;
+  className?: string;
   defaultVisibility?: boolean;
 };
 
@@ -33,6 +36,7 @@ export const OpacitySlider = ({
   label,
   setLayerOpacity,
   setLayerVisibility,
+  className,
   defaultVisibility = true,
 }: Props) => {
   const { classes } = useStyles();
@@ -61,7 +65,7 @@ export const OpacitySlider = ({
   };
 
   return (
-    <>
+    <div className={className}>
       <Checkbox
         className={classes.checkbox}
         options={[
@@ -90,6 +94,6 @@ export const OpacitySlider = ({
           <span className={classes.sliderValue}>{isVisible ? opacity : 0} %</span>
         </Grid>
       </Grid>
-    </>
+    </div>
   );
 };
