@@ -36,6 +36,7 @@ const commonThirdPartyDeps = (() => {
     "tss-react",
     "react-router-dom",
     "ol",
+    "@mui/material",
   ];
 
   return [
