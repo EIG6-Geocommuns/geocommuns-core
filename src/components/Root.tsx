@@ -44,7 +44,7 @@ export const Root = ({ title, contactMail, feedbackLink, contentDescription }: P
         homeLinkProps={homeLinkProps}
         quickAccessItems={[
           {
-            iconId: "fr-icon-lock-line",
+            iconId: "fr-icon-account-circle-line",
             linkProps: {
               href: "#",
               className: classes.disabled,
