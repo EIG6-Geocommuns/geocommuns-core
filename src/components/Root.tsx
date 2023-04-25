@@ -55,6 +55,7 @@ export const Root = ({ title, contactMail, feedbackLink, contentDescription }: P
             iconId: "ri-chat-3-line",
             linkProps: {
               href: feedbackLink || "#",
+              target: "_self",
             },
             text: "Soumettre mes retours",
           },

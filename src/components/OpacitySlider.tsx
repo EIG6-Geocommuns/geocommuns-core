@@ -30,6 +30,7 @@ type Props = {
   setLayerVisibility(visible: boolean): void;
   className?: string;
   defaultVisibility?: boolean;
+  defaultOpacity?: number;
 };
 
 export const OpacitySlider = ({
@@ -38,9 +39,10 @@ export const OpacitySlider = ({
   setLayerVisibility,
   className,
   defaultVisibility = true,
+  defaultOpacity = 100,
 }: Props) => {
   const { classes } = useStyles();
-  const [opacity, setOpacity] = useState(100);
+  const [opacity, setOpacity] = useState(defaultOpacity);
   const [isVisible, setIsVisible] = useState(defaultVisibility);
 
   const handleVisibilityUpdate = useConstCallback(() => {
