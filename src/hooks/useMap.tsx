@@ -20,6 +20,7 @@ import {
 } from "../map/controllers";
 import { aiPredictionLayer, getIgnWMTSTileLayer } from "../map/ignTileLayer";
 import { Control } from "ol/control";
+import { useIsMapLoading } from "./useIsMapLoading";
 
 export type AvailableLayer = "planIGN" | "ortho" | "admin" | "aiPrediction";
 
@@ -99,6 +100,7 @@ export const useMap = (
 ) => {
   const { classes, cx } = useStyles();
   const [map, setMap] = useState<Map | undefined>(undefined);
+  const { isLoading } = useIsMapLoading(map);
 
   const mapLayers = useMemo(() => layers.map(layer => LAYER_TO_OPENLAYER_LAYER[layer]), [layers]);
 
@@ -191,5 +193,5 @@ export const useMap = (
     ol_layer.setVisible(visibility);
   });
 
-  return { setNewCenterAndNewZoom, fitViewToPolygon, setLayerOpacity, setLayerVisibility };
+  return { setNewCenterAndNewZoom, fitViewToPolygon, setLayerOpacity, setLayerVisibility, isLoading };
 };
