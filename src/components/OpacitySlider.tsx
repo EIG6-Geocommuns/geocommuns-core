@@ -5,7 +5,7 @@ import { Checkbox } from "@codegouvfr/react-dsfr/Checkbox";
 import { useConstCallback } from "powerhooks";
 import { fr } from "@codegouvfr/react-dsfr";
 
-const useStyles = makeStyles()({
+const useStyles = makeStyles<{ maxWidth: number | undefined }>()((_theme, { maxWidth }) => ({
   sliderValue: {
     width: "3rem",
     display: "inline-block",
@@ -21,8 +21,9 @@ const useStyles = makeStyles()({
   },
   slider: {
     width: "100%",
+    maxWidth,
   },
-});
+}));
 
 type Props = {
   label: string;
@@ -30,6 +31,8 @@ type Props = {
   setLayerVisibility(visible: boolean): void;
   className?: string;
   defaultVisibility?: boolean;
+  defaultOpacity?: number;
+  maxWidth?: number;
 };
 
 export const OpacitySlider = ({
@@ -38,9 +41,11 @@ export const OpacitySlider = ({
   setLayerVisibility,
   className,
   defaultVisibility = true,
+  defaultOpacity = 100,
+  maxWidth,
 }: Props) => {
-  const { classes } = useStyles();
-  const [opacity, setOpacity] = useState(100);
+  const { classes } = useStyles({ maxWidth });
+  const [opacity, setOpacity] = useState(defaultOpacity);
   const [isVisible, setIsVisible] = useState(defaultVisibility);
 
   const handleVisibilityUpdate = useConstCallback(() => {

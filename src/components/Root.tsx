@@ -4,12 +4,14 @@ import { Footer } from "@codegouvfr/react-dsfr/Footer";
 import { Display, headerFooterDisplayItem } from "@codegouvfr/react-dsfr/Display";
 import { makeStyles } from "tss-react/dsfr";
 import { ReactNode } from "react";
+import { RegisteredLinkProps } from "@codegouvfr/react-dsfr/link";
 
 type Props = {
   title: ReactNode;
   contactMail: string;
   feedbackLink?: string;
   contentDescription?: string;
+  websiteMapLinkProps?: RegisteredLinkProps;
 };
 
 const useStyles = makeStyles()(theme => ({
@@ -21,7 +23,13 @@ const useStyles = makeStyles()(theme => ({
   },
 }));
 
-export const Root = ({ title, contactMail, feedbackLink, contentDescription }: Props): JSX.Element => {
+export const Root = ({
+  title,
+  contactMail,
+  feedbackLink,
+  contentDescription,
+  websiteMapLinkProps = { href: "#" },
+}: Props): JSX.Element => {
   const { classes } = useStyles();
   const brandTop = (
     <>
@@ -44,7 +52,7 @@ export const Root = ({ title, contactMail, feedbackLink, contentDescription }: P
         homeLinkProps={homeLinkProps}
         quickAccessItems={[
           {
-            iconId: "fr-icon-lock-line",
+            iconId: "fr-icon-account-circle-line",
             linkProps: {
               href: "#",
               className: classes.disabled,
@@ -55,6 +63,7 @@ export const Root = ({ title, contactMail, feedbackLink, contentDescription }: P
             iconId: "ri-chat-3-line",
             linkProps: {
               href: feedbackLink || "#",
+              target: "_self",
             },
             text: "Soumettre mes retours",
           },
@@ -78,7 +87,7 @@ export const Root = ({ title, contactMail, feedbackLink, contentDescription }: P
         contentDescription={contentDescription}
         personalDataLinkProps={{ href: "#" }}
         termsLinkProps={{ href: "#" }}
-        websiteMapLinkProps={{ href: "#" }}
+        websiteMapLinkProps={websiteMapLinkProps}
         bottomItems={[headerFooterDisplayItem]}
       />
       <Display />

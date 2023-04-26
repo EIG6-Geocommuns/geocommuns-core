@@ -20,6 +20,7 @@ import {
 } from "../map/controllers";
 import { aiPredictionLayer, getIgnWMTSTileLayer } from "../map/ignTileLayer";
 import { Control } from "ol/control";
+import { useIsMapLoading } from "./useIsMapLoading";
 
 export type AvailableLayer = "planIGN" | "ortho" | "admin" | "aiPrediction";
 
@@ -38,46 +39,42 @@ const useStyles = makeStyles({ name: "Map" })({
     display: "flex",
     flexDirection: "column",
     justifyContent: "flex-end",
-    height: "100%",
-    bottom: 0,
-    left: 0,
+    bottom: fr.spacing("7w"),
+    right: 0,
     margin: fr.spacing("2w"),
-    marginBottom: fr.spacing("9w"),
     backgroundColor: "transparent",
   },
   mapControllersZoomButton: {
     "&&": {
-      height: fr.spacing("5w"),
       width: fr.spacing("5w"),
       fontSize: "x-large",
       color: lightTheme.decisions.background.actionHigh.blueFrance.default,
-      backgroundColor: lightTheme.decisions.artwork.background.grey.default,
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
+      margin: 0,
+      "&:hover": {
+        outline: "none",
+      },
     },
   },
-  mapControllersZoomInButton: {
-    borderBottom: "1px solid",
-    borderColor: lightTheme.decisions.background.actionHigh.blueFrance.default,
+  mapControllersZoomOutButton: {
+    marginTop: -1,
   },
-
   fullScreenContainer: {
     position: "absolute",
     display: "flex",
     flexDirection: "row",
     height: "100%",
     bottom: 0,
-    left: 0,
-    color: lightTheme.decisions.background.actionHigh.blueFrance.default,
+    right: 0,
     backgroundColor: "transparent",
     "&& > button": {
       height: fr.spacing("5w"),
       width: fr.spacing("5w"),
       fontSize: "large",
       color: lightTheme.decisions.background.actionHigh.blueFrance.default,
-      backgroundColor: lightTheme.decisions.artwork.background.grey.default,
       margin: fr.spacing("2w"),
+      "&:hover": {
+        outline: "none",
+      },
     },
   },
   inactivateFullScreen: {
@@ -85,7 +82,7 @@ const useStyles = makeStyles({ name: "Map" })({
   },
   scaleLine: {
     bottom: fr.spacing("2w"),
-    right: fr.spacing("4w"),
+    right: fr.spacing("9w"),
     left: "auto",
     fontSize: "large",
   },
@@ -99,6 +96,7 @@ export const useMap = (
 ) => {
   const { classes, cx } = useStyles();
   const [map, setMap] = useState<Map | undefined>(undefined);
+  const { isLoading } = useIsMapLoading(map);
 
   const mapLayers = useMemo(() => layers.map(layer => LAYER_TO_OPENLAYER_LAYER[layer]), [layers]);
 
@@ -115,8 +113,12 @@ export const useMap = (
     () =>
       createZoomController({
         className: classes.zoomContainer,
-        zoomInClassName: cx(classes.mapControllersZoomButton, classes.mapControllersZoomInButton),
-        zoomOutClassName: classes.mapControllersZoomButton,
+        zoomInClassName: cx("fr-btn fr-btn--secondary", classes.mapControllersZoomButton),
+        zoomOutClassName: cx(
+          "fr-btn fr-btn--secondary",
+          classes.mapControllersZoomButton,
+          classes.mapControllersZoomOutButton,
+        ),
       }),
     [classes],
   );
@@ -125,7 +127,7 @@ export const useMap = (
     () =>
       createFullScreenController({
         className: classes.fullScreenContainer,
-        inactiveClassName: classes.inactivateFullScreen,
+        inactiveClassName: cx("fr-btn fr-btn--secondary", classes.inactivateFullScreen),
       }),
     [classes],
   );
@@ -191,5 +193,5 @@ export const useMap = (
     ol_layer.setVisible(visibility);
   });
 
-  return { setNewCenterAndNewZoom, fitViewToPolygon, setLayerOpacity, setLayerVisibility };
+  return { setNewCenterAndNewZoom, fitViewToPolygon, setLayerOpacity, setLayerVisibility, isLoading };
 };
