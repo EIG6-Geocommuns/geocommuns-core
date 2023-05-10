@@ -5,3 +5,4 @@ export * from "./components/OpacitySlider";
 export * from "./components/DataDescriptionCard/DataDescriptionCard";
 
 export * from "./hooks/useMap";
+export * from "./hooks/useTabs";
