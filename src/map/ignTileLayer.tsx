@@ -7,20 +7,23 @@ import ImageWMS from "ol/source/ImageWMS";
 type IGNLayers =
   | "GEOGRAPHICALGRIDSYSTEMS.PLANIGNV2"
   | "ORTHOIMAGERY.ORTHOPHOTOS"
-  | "LIMITES_ADMINISTRATIVES_EXPRESS.LATEST";
+  | "LIMITES_ADMINISTRATIVES_EXPRESS.LATEST"
+  | "COSIA";
 
 const LAYERS_TO_FORMAT: { [key in IGNLayers]: "image/jpeg" | "image/png" } = {
   "GEOGRAPHICALGRIDSYSTEMS.PLANIGNV2": "image/png",
   "ORTHOIMAGERY.ORTHOPHOTOS": "image/jpeg",
   "LIMITES_ADMINISTRATIVES_EXPRESS.LATEST": "image/png",
+  "COSIA": "image/png",
 };
 
 const LAYERS_TO_URL_CODE: {
-  [key in IGNLayers]: "choisirgeoportail" | "0gd4sx9gxx6ves3hf3hfeyhw";
+  [key in IGNLayers]: "choisirgeoportail" | "0gd4sx9gxx6ves3hf3hfeyhw" | "5jsuu4l5fobniiv05i5p54uk";
 } = {
   "GEOGRAPHICALGRIDSYSTEMS.PLANIGNV2": "choisirgeoportail",
   "ORTHOIMAGERY.ORTHOPHOTOS": "choisirgeoportail",
   "LIMITES_ADMINISTRATIVES_EXPRESS.LATEST": "0gd4sx9gxx6ves3hf3hfeyhw",
+  "COSIA": "5jsuu4l5fobniiv05i5p54uk",
 };
 
 const EPSG3857 = "EPSG:3857";
@@ -93,4 +96,5 @@ const rhoneAiPredictionSource = new ImageWMS({
 
 // Not used. To remove ?
 export const gersPredictionLayer = new ImageLayer({ source: gersPredictionSource });
-export const aiPredictionLayer = new ImageLayer({ source: rhoneAiPredictionSource });
+export const rhonePredictionLayer = new ImageLayer({ source: rhoneAiPredictionSource });
+export const aiPredictionLayer = getIgnWMTSTileLayer("COSIA");
