@@ -1,5 +1,5 @@
 export * from "./components/Home";
-export * from "./components/Root";
+export * from "./components/Root/Root";
 export * from "./components/ErrorPage";
 export * from "./components/Page";
 export * from "./components/OpacitySlider";
