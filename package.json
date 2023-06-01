@@ -1,6 +1,6 @@
 {
   "name": "geocommuns-core",
-  "version": "0.10.3",
+  "version": "0.10.4",
   "description": "Set of shared utilities (hooks and Components) for the geocommuns project",
   "repository": {
     "type": "git",
@@ -45,7 +45,7 @@
   "keywords": [],
   "homepage": "https://github.com/EIG6-Geocommuns/geocommuns-core",
   "peerDependencies": {
-    "@codegouvfr/react-dsfr": "^0.57.4",
+    "@codegouvfr/react-dsfr": "^0.58.5",
     "@emotion/react": "^11.10.5",
     "@mui/material": "^5.10",
     "ol": "^7.1.0",
@@ -54,7 +54,7 @@
     "tss-react": "^4.8.4"
   },
   "devDependencies": {
-    "@codegouvfr/react-dsfr": "^0.57.4",
+    "@codegouvfr/react-dsfr": "^0.58.5",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.6",
     "@mui/material": "^5.10",
