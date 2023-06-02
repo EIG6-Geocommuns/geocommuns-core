@@ -12,6 +12,7 @@ type Props = {
   feedbackLink?: string;
   contentDescription?: string;
   websiteMapLinkProps?: RegisteredLinkProps;
+  personalDataLinkProps?: RegisteredLinkProps;
 };
 
 const useStyles = makeStyles()(theme => ({
@@ -29,6 +30,7 @@ export const Root = ({
   feedbackLink,
   contentDescription,
   websiteMapLinkProps = { href: "#" },
+  personalDataLinkProps = { href: "#" },
 }: Props): JSX.Element => {
   const { classes } = useStyles();
   const brandTop = (
@@ -85,7 +87,7 @@ export const Root = ({
         brandTop={brandTop}
         homeLinkProps={homeLinkProps}
         contentDescription={contentDescription}
-        personalDataLinkProps={{ href: "#" }}
+        personalDataLinkProps={personalDataLinkProps}
         termsLinkProps={{ href: "#" }}
         websiteMapLinkProps={websiteMapLinkProps}
         bottomItems={[headerFooterDisplayItem]}
