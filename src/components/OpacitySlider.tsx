@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { Grid, Slider } from "@mui/material";
 import { makeStyles } from "tss-react/dsfr";
 import { Checkbox } from "@codegouvfr/react-dsfr/Checkbox";
@@ -35,6 +35,7 @@ type Props = {
   maxWidth?: number;
 };
 
+//TODO remove export when all apps use Memoized
 export const OpacitySlider = ({
   label,
   setLayerOpacity,
@@ -102,3 +103,5 @@ export const OpacitySlider = ({
     </div>
   );
 };
+
+export const MemoizedOpacitySlider = memo(OpacitySlider);
