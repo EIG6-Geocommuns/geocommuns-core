@@ -1,5 +1,4 @@
 import { fr } from "@codegouvfr/react-dsfr";
-import { ScrollRestoration } from "react-router-dom";
 import { makeStyles } from "tss-react/dsfr";
 
 const useStyles = makeStyles()(theme => ({
@@ -14,9 +13,9 @@ const useStyles = makeStyles()(theme => ({
 
 export const PersonalData = () => {
   const { classes } = useStyles();
+
   return (
     <section className={classes.body}>
-      <ScrollRestoration />
       <h1>Données personnelles</h1>
 
       <h6>1. Qu’est-ce qu’une donnée personnelle ?</h6>

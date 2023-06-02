@@ -11,8 +11,9 @@ type Props = {
   contactMail: string;
   feedbackLink?: string;
   contentDescription?: string;
-  websiteMapLinkProps?: RegisteredLinkProps;
   personalDataLinkProps?: RegisteredLinkProps;
+  termsLinkProps?: RegisteredLinkProps;
+  websiteMapLinkProps?: RegisteredLinkProps;
 };
 
 const useStyles = makeStyles()(theme => ({
@@ -29,8 +30,9 @@ export const Root = ({
   contactMail,
   feedbackLink,
   contentDescription,
-  websiteMapLinkProps = { href: "#" },
   personalDataLinkProps = { href: "#" },
+  termsLinkProps = { href: "#" },
+  websiteMapLinkProps = { href: "#" },
 }: Props): JSX.Element => {
   const { classes } = useStyles();
   const brandTop = (
@@ -88,7 +90,7 @@ export const Root = ({
         homeLinkProps={homeLinkProps}
         contentDescription={contentDescription}
         personalDataLinkProps={personalDataLinkProps}
-        termsLinkProps={{ href: "#" }}
+        termsLinkProps={termsLinkProps}
         websiteMapLinkProps={websiteMapLinkProps}
         bottomItems={[headerFooterDisplayItem]}
       />
