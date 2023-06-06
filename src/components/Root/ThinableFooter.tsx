@@ -33,17 +33,19 @@ type Props = {
   homeLinkProps: RegisteredLinkProps & { title: string };
   personalDataLinkProps: RegisteredLinkProps;
   termsLinkProps: RegisteredLinkProps;
-  contentDescription?: React.ReactNode;
+  cookiesManagementLinkProps: RegisteredLinkProps;
   websiteMapLinkProps: RegisteredLinkProps;
+  contentDescription?: React.ReactNode;
 };
 
 export const ThinableFooter = ({
   brandTop,
   homeLinkProps,
-  contentDescription,
   personalDataLinkProps,
   termsLinkProps,
+  cookiesManagementLinkProps,
   websiteMapLinkProps,
+  contentDescription,
 }: Props) => {
   const { cx, classes } = useStyles();
   const [isThin, setIsThin] = useState(false);
@@ -136,6 +138,11 @@ export const ThinableFooter = ({
             <li className="fr-footer__bottom-item">
               <a className="fr-footer__bottom-link" {...personalDataLinkProps}>
                 Données personnelles
+              </a>
+            </li>
+            <li className="fr-footer__bottom-item">
+              <a className="fr-footer__bottom-link" {...cookiesManagementLinkProps}>
+                Gestion des cookies
               </a>
             </li>
             <li className="fr-footer__bottom-item">{darkModeButton}</li>

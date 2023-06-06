@@ -14,6 +14,7 @@ type Props = {
   contentDescription?: string;
   personalDataLinkProps?: RegisteredLinkProps;
   termsLinkProps?: RegisteredLinkProps;
+  cookiesManagementLinkProps?: RegisteredLinkProps;
   websiteMapLinkProps?: RegisteredLinkProps;
   isFooterThinable?: boolean;
 };
@@ -34,6 +35,7 @@ export const Root = ({
   contentDescription,
   personalDataLinkProps = { href: "#" },
   termsLinkProps = { href: "#" },
+  cookiesManagementLinkProps = { href: "#" },
   websiteMapLinkProps = { href: "#" },
   isFooterThinable = false,
 }: Props): JSX.Element => {
@@ -58,6 +60,7 @@ export const Root = ({
       contentDescription={contentDescription}
       personalDataLinkProps={personalDataLinkProps}
       termsLinkProps={termsLinkProps}
+      cookiesManagementLinkProps={cookiesManagementLinkProps}
       websiteMapLinkProps={websiteMapLinkProps}
     />
   ) : (
@@ -68,6 +71,7 @@ export const Root = ({
       contentDescription={contentDescription}
       personalDataLinkProps={personalDataLinkProps}
       termsLinkProps={termsLinkProps}
+      cookiesManagementLinkProps={cookiesManagementLinkProps}
       websiteMapLinkProps={websiteMapLinkProps}
       bottomItems={[headerFooterDisplayItem]}
     />
