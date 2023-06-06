@@ -6,6 +6,7 @@ export * from "./components/OpacitySlider";
 export * from "./components/DataDescriptionCard/DataDescriptionCard";
 export * from "./components/PersonalData";
 export * from "./components/LegalTerms";
+export * from "./components/CookiesManagement";
 
 export * from "./hooks/useMap";
 export * from "./hooks/useTabs";
