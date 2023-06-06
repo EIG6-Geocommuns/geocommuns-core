@@ -1,10 +1,11 @@
 import { Outlet } from "react-router-dom";
 import { Header } from "@codegouvfr/react-dsfr/Header";
-import { Footer } from "@codegouvfr/react-dsfr/Footer";
 import { Display, headerFooterDisplayItem } from "@codegouvfr/react-dsfr/Display";
 import { makeStyles } from "tss-react/dsfr";
 import { ReactNode } from "react";
 import { RegisteredLinkProps } from "@codegouvfr/react-dsfr/link";
+import { ThinableFooter } from "./ThinableFooter";
+import Footer from "@codegouvfr/react-dsfr/Footer";
 
 type Props = {
   title: ReactNode;
@@ -14,6 +15,7 @@ type Props = {
   personalDataLinkProps?: RegisteredLinkProps;
   termsLinkProps?: RegisteredLinkProps;
   websiteMapLinkProps?: RegisteredLinkProps;
+  isFooterThinable?: boolean;
 };
 
 const useStyles = makeStyles()(theme => ({
@@ -33,6 +35,7 @@ export const Root = ({
   personalDataLinkProps = { href: "#" },
   termsLinkProps = { href: "#" },
   websiteMapLinkProps = { href: "#" },
+  isFooterThinable = false,
 }: Props): JSX.Element => {
   const { classes } = useStyles();
   const brandTop = (
@@ -44,9 +47,31 @@ export const Root = ({
   );
 
   const homeLinkProps = {
-    to: "/",
+    href: "/",
     title: "Accueil - IGN",
   };
+
+  const footer = isFooterThinable ? (
+    <ThinableFooter
+      brandTop={brandTop}
+      homeLinkProps={homeLinkProps}
+      contentDescription={contentDescription}
+      personalDataLinkProps={personalDataLinkProps}
+      termsLinkProps={termsLinkProps}
+      websiteMapLinkProps={websiteMapLinkProps}
+    />
+  ) : (
+    <Footer
+      accessibility="non compliant"
+      brandTop={brandTop}
+      homeLinkProps={homeLinkProps}
+      contentDescription={contentDescription}
+      personalDataLinkProps={personalDataLinkProps}
+      termsLinkProps={termsLinkProps}
+      websiteMapLinkProps={websiteMapLinkProps}
+      bottomItems={[headerFooterDisplayItem]}
+    />
+  );
 
   return (
     <div style={{ height: "100vh", display: "flex", flexDirection: "column" }}>
@@ -84,16 +109,7 @@ export const Root = ({
 
       <Outlet />
 
-      <Footer
-        accessibility="non compliant"
-        brandTop={brandTop}
-        homeLinkProps={homeLinkProps}
-        contentDescription={contentDescription}
-        personalDataLinkProps={personalDataLinkProps}
-        termsLinkProps={termsLinkProps}
-        websiteMapLinkProps={websiteMapLinkProps}
-        bottomItems={[headerFooterDisplayItem]}
-      />
+      {footer}
       <Display />
     </div>
   );
