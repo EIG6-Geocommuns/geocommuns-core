@@ -11,7 +11,8 @@
   "scripts": {
     "test": "echo DODO",
     "dev": "tsc -w",
-    "build": "tsc",
+    "build": "tsc && yarn copy-assets",
+    "copy-assets": "copyfiles -u 1 src/assets/**/* dist/",
     "lint:check": "eslint . --ext .ts,.tsx",
     "lint": "npm run lint:check -- --fix",
     "_format": "prettier '**/*.{ts,tsx,json,md}'",
@@ -63,6 +64,7 @@
     "@types/react": "^18",
     "@typescript-eslint/eslint-plugin": "^4.28.5",
     "@typescript-eslint/parser": "^4.28.5",
+    "copyfiles": "^2.4.1",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
     "husky": "^4.3.8",
