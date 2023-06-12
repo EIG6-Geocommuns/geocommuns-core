@@ -80,6 +80,13 @@ export const ThinableFooter = ({
     </button>
   );
 
+  const transformLinkdProps = (linkProps: RegisteredLinkProps & { to?: string }) => {
+    if (linkProps.to) {
+      return { ...linkProps, href: linkProps.to };
+    }
+    return { linkProps };
+  };
+
   return (
     <footer className={cx("fr-footer", classes.footer)} role="contentinfo" id="footer">
       <div className={getIsThinWrappedClassName(classes.cross, classes.hidden)}>
@@ -121,7 +128,7 @@ export const ThinableFooter = ({
         <div className={getIsThinWrappedClassName("fr-footer__bottom", classes.bottom)}>
           <ul className={getIsThinWrappedClassName("fr-footer__bottom-list", classes.bottomList)}>
             <li className="fr-footer__bottom-item">
-              <a className="fr-footer__bottom-link" {...websiteMapLinkProps}>
+              <a className="fr-footer__bottom-link" {...transformLinkdProps(websiteMapLinkProps)}>
                 Plan du site
               </a>
             </li>
@@ -131,17 +138,17 @@ export const ThinableFooter = ({
               </a>
             </li>
             <li className="fr-footer__bottom-item">
-              <a className="fr-footer__bottom-link" {...termsLinkProps}>
+              <a className="fr-footer__bottom-link" {...transformLinkdProps(termsLinkProps)}>
                 Mentions légales
               </a>
             </li>
             <li className="fr-footer__bottom-item">
-              <a className="fr-footer__bottom-link" {...personalDataLinkProps}>
+              <a className="fr-footer__bottom-link" {...transformLinkdProps(personalDataLinkProps)}>
                 Données personnelles
               </a>
             </li>
             <li className="fr-footer__bottom-item">
-              <a className="fr-footer__bottom-link" {...cookiesManagementLinkProps}>
+              <a className="fr-footer__bottom-link" {...transformLinkdProps(cookiesManagementLinkProps)}>
                 Gestion des cookies
               </a>
             </li>
