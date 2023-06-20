@@ -49,7 +49,7 @@ export const Root = ({
   );
 
   const homeLinkProps = {
-    href: "/",
+    to: "/",
     title: "Accueil - IGN",
   };
 
