@@ -90,7 +90,7 @@ export const ThinableFooter = ({
   return (
     <footer className={cx("fr-footer", classes.footer)} role="contentinfo" id="footer">
       <div className={getIsThinWrappedClassName(classes.cross, classes.hidden)}>
-        <button className="fr-button ri-close-line fr-btn--icon" onClick={minimizeFooter} />
+        <button className="fr-button fr-icon-arrow-up-s-line fr-btn--icon" onClick={minimizeFooter} />
       </div>
       <div className="fr-container">
         <div className={getIsThinWrappedClassName("fr-footer__body", classes.hidden)}>
@@ -156,7 +156,7 @@ export const ThinableFooter = ({
             {isThin && (
               <li className="fr-footer__bottom-item">
                 <button
-                  className="fr-footer__bottom-link ri-add-line fr-link--icon-left"
+                  className="fr-footer__bottom-link fr-icon-arrow-down-s-line fr-link--icon-left"
                   onClick={() => setIsThin(!isThin)}
                 >
                   Afficher le pied de page

@@ -58,7 +58,7 @@ export const GenericDataInfo = ({ textInfo, docs }: Props) => {
           </span>
         </div>
 
-        {docs && (
+        {docs.length !== 0 && (
           <>
             <hr />
 
