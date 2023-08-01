@@ -9,16 +9,7 @@ const useStyles = makeStyles()(theme => ({
   },
   title: {
     color: theme.decisions.text.title.blueFrance.default,
-    marginBottom: fr.spacing("1v"),
-  },
-  infoContainer: {
     marginBottom: 0,
-  },
-  infoItem: {
-    marginBottom: fr.spacing("1v"),
-  },
-  icon: {
-    marginRight: fr.spacing("1w"),
   },
 }));
 
@@ -34,33 +25,29 @@ const InfoBlock = ({ title, subtitle, creationDate, updateDate }: Props) => {
 
   return (
     <Grid container flexDirection="column">
-      <Grid item className={classes.titleContainer}>
-        <h1 className={classes.title}>{title}</h1>
-        <div>
-          <b>{subtitle}</b>
-        </div>
-      </Grid>
+      <h2 className={classes.title}>{title}</h2>
+      <div>
+        <b>{subtitle}</b>
+      </div>
 
-      <Grid item className={classes.infoContainer}>
-        <div className={classes.infoItem}>Producteur : IGN</div>
+      <div>IGN - Institut national de l'information géographique et forestière</div>
 
-        <Grid
-          container
-          columnSpacing={fr.spacing("3v")}
-          rowSpacing={fr.spacing("1v")}
-          mb={fr.spacing("1v")}
-        >
-          <Grid item xs={12} sm="auto">
-            Création :{" "}
-            <time dateTime={creationDate.toISOString()}>{creationDate.toLocaleDateString()}</time>
-          </Grid>
-          <Grid item xs={0} sm="auto" sx={{ display: { xs: "none", sm: "block" } }}>
-            <Divider orientation="vertical" />
-          </Grid>
-          <Grid item xs={12} sm="auto">
-            Mise à jour :{" "}
-            <time dateTime={updateDate.toISOString()}>{updateDate.toLocaleDateString()}</time>
-          </Grid>
+      <Grid
+        container
+        columnSpacing={fr.spacing("3v")}
+        rowSpacing={fr.spacing("1v")}
+        mb={fr.spacing("1v")}
+      >
+        <Grid item xs={12} sm="auto">
+          Création :{" "}
+          <time dateTime={creationDate.toISOString()}>{creationDate.toLocaleDateString()}</time>
+        </Grid>
+        <Grid item xs={0} sm="auto" sx={{ display: { xs: "none", sm: "block" } }}>
+          <Divider orientation="vertical" />
+        </Grid>
+        <Grid item xs={12} sm="auto">
+          Mise à jour :{" "}
+          <time dateTime={updateDate.toISOString()}>{updateDate.toLocaleDateString()}</time>
         </Grid>
       </Grid>
     </Grid>

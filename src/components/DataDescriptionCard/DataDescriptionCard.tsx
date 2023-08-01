@@ -14,13 +14,13 @@ const useStyles = makeStyles()(theme => ({
   },
   image: {
     objectFit: "cover",
-    height: 180,
+    height: 114,
     borderRadius: 8,
     [fr.breakpoints.down("md")]: {
       width: "100%",
     },
     [fr.breakpoints.up("md")]: {
-      width: 180,
+      width: 114,
     },
   },
   button: {
@@ -101,15 +101,16 @@ const DataDescriptionCard = ({
           justifyContent={{ xs: "flex-start", md: "flex-end" }}
         >
           <Grid item xs={12} sm="auto">
-            <Button iconId="fr-icon-star-line" className={classes.button}>
-              Ajouter à mes favoris
-            </Button>
+            <Button iconId="fr-icon-star-line" className={classes.button} title="Ajouter en favoris" />
           </Grid>
 
           <Grid item xs={12} sm="auto">
-            <Button iconId="fr-icon-link" className={classes.button} onClick={copyUrlToClipboard}>
-              Copier l'url
-            </Button>
+            <Button
+              iconId="fr-icon-link"
+              className={classes.button}
+              onClick={copyUrlToClipboard}
+              title="Copier l'URL"
+            />
           </Grid>
         </Grid>
       </Grid>
