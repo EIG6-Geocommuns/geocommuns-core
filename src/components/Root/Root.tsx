@@ -1,7 +1,6 @@
 import { Outlet } from "react-router-dom";
-import { Header } from "@codegouvfr/react-dsfr/Header";
-import { Display, headerFooterDisplayItem } from "@codegouvfr/react-dsfr/Display";
-import { makeStyles } from "tss-react/dsfr";
+import { Header, HeaderProps } from "@codegouvfr/react-dsfr/Header";
+import { headerFooterDisplayItem } from "@codegouvfr/react-dsfr/Display";
 import { ReactNode } from "react";
 import { RegisteredLinkProps } from "@codegouvfr/react-dsfr/link";
 import { ThinableFooter } from "./ThinableFooter";
@@ -9,8 +8,7 @@ import Footer from "@codegouvfr/react-dsfr/Footer";
 
 type Props = {
   title: ReactNode;
-  contactMail: string;
-  feedbackLink?: string;
+  quickAccessItems?: HeaderProps.QuickAccessItem[];
   contentDescription?: string;
   personalDataLinkProps?: RegisteredLinkProps;
   termsLinkProps?: RegisteredLinkProps;
@@ -19,19 +17,9 @@ type Props = {
   isFooterThinable?: boolean;
 };
 
-const useStyles = makeStyles()(theme => ({
-  disabled: {
-    pointerEvents: "none",
-    "&&": {
-      color: theme.decisions.text.disabled.grey.default,
-    },
-  },
-}));
-
 export const Root = ({
   title,
-  contactMail,
-  feedbackLink,
+  quickAccessItems,
   contentDescription,
   personalDataLinkProps = { href: "#" },
   termsLinkProps = { href: "#" },
@@ -39,7 +27,6 @@ export const Root = ({
   websiteMapLinkProps = { href: "#" },
   isFooterThinable = false,
 }: Props): JSX.Element => {
-  const { classes } = useStyles();
   const brandTop = (
     <>
       République
@@ -85,38 +72,13 @@ export const Root = ({
         brandTop={brandTop}
         serviceTitle={title}
         homeLinkProps={homeLinkProps}
-        quickAccessItems={[
-          {
-            iconId: "fr-icon-account-circle-line",
-            linkProps: {
-              href: "#",
-              className: classes.disabled,
-            },
-            text: "Me connecter",
-          },
-          {
-            iconId: "ri-chat-3-line",
-            linkProps: {
-              href: feedbackLink || "#",
-              target: "_self",
-            },
-            text: "Soumettre mes retours",
-          },
-          {
-            iconId: "ri-mail-line",
-            linkProps: {
-              href: `mailto:${contactMail}`,
-            },
-            text: "Nous contacter",
-          },
-        ]}
-        serviceTagline="Prototype - Version1 - 2023"
+        quickAccessItems={quickAccessItems}
+        serviceTagline="Prototype - version 1.2 - août 2023"
       />
 
       <Outlet />
 
       {footer}
-      <Display />
     </div>
   );
 };

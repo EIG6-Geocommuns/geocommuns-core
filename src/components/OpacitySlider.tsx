@@ -74,6 +74,7 @@ export const OpacitySlider = ({
     <div className={className}>
       <Checkbox
         className={classes.checkbox}
+        small
         options={[
           {
             label,
