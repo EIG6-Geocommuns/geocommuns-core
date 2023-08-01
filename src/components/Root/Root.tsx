@@ -69,11 +69,13 @@ export const Root = ({
       brandTop={brandTop}
       homeLinkProps={homeLinkProps}
       contentDescription={contentDescription}
-      personalDataLinkProps={personalDataLinkProps}
       termsLinkProps={termsLinkProps}
-      cookiesManagementLinkProps={cookiesManagementLinkProps}
       websiteMapLinkProps={websiteMapLinkProps}
-      bottomItems={[headerFooterDisplayItem]}
+      bottomItems={[
+        { linkProps: personalDataLinkProps, text: "Données personnelles" },
+        { linkProps: cookiesManagementLinkProps, text: "Gestion des cookies" },
+        headerFooterDisplayItem,
+      ]}
     />
   );
 
