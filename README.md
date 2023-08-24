@@ -39,8 +39,8 @@ cd lidarviz-front
 yarn
 
 cd ~/github
-git clone https://github.com/EIG6-ArtificIA/predictia_front
-cd predictia_front
+git clone https://github.com/EIG6-ArtificIA/cosia_front
+cd cosia_front
 yarn
 
 cd ~/github
@@ -48,7 +48,7 @@ git clone https://github.com/EIG6-Geocommuns/geocommuns-core
 cd geocommuns-core
 yarn
 yarn build
-yarn link-in-main-project lidarviz-front predictia_front
+yarn link-in-main-project lidarviz-front cosia_front
 yarn dev
 
 # Open another terminal

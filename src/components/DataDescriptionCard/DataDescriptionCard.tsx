@@ -23,12 +23,6 @@ const useStyles = makeStyles()(theme => ({
       width: 114,
     },
   },
-  button: {
-    [fr.breakpoints.down("sm")]: {
-      width: "100%",
-      justifyContent: "center",
-    },
-  },
   alert: {
     backgroundColor: theme.decisions.background.default.grey.default,
   },
@@ -101,16 +95,11 @@ const DataDescriptionCard = ({
           justifyContent={{ xs: "flex-start", md: "flex-end" }}
         >
           <Grid item xs={12} sm="auto">
-            <Button iconId="fr-icon-star-line" className={classes.button} title="Ajouter en favoris" />
+            <Button iconId="fr-icon-star-line" title="Ajouter en favoris" />
           </Grid>
 
           <Grid item xs={12} sm="auto">
-            <Button
-              iconId="fr-icon-link"
-              className={classes.button}
-              onClick={copyUrlToClipboard}
-              title="Copier l'URL"
-            />
+            <Button iconId="fr-icon-link" onClick={copyUrlToClipboard} title="Copier l'URL" />
           </Grid>
         </Grid>
       </Grid>
