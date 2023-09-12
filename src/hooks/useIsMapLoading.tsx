@@ -5,12 +5,10 @@ export const useIsMapLoading = (map: Map | undefined) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const setIsLoadingToTrue = useCallback(() => {
-    console.log("set to true !");
     setIsLoading(true);
   }, []);
 
   const setIsLoadingToFalse = useCallback(() => {
-    console.log("set to false !");
     setIsLoading(false);
   }, []);
 
