@@ -1,25 +1,22 @@
 import { fr } from "@codegouvfr/react-dsfr";
-import { Feature, Map, View } from "ol";
+import { Map, View } from "ol";
 import { Coordinate } from "ol/coordinate";
 import { Polygon } from "ol/geom";
-import { Vector as VectorLayer } from "ol/layer";
 import BaseLayer from "ol/layer/Base";
 import "ol/ol.css";
-import { fromLonLat, Projection } from "ol/proj";
-import VectorSource from "ol/source/Vector";
+import { Projection, fromLonLat } from "ol/proj";
 import { useConstCallback } from "powerhooks/useConstCallback";
 import { useEffect, useMemo, useState } from "react";
-import { assert } from "tsafe/assert";
-import { makeStyles } from "tss-react/dsfr";
 import { isMobile } from "react-device-detect";
+import { makeStyles } from "tss-react/dsfr";
 
+import { Control } from "ol/control";
 import {
   createFullScreenController,
   createScaleLineController,
   createZoomController,
 } from "../map/controllers";
 import { aiPredictionLayer, getIgnWMTSTileLayer } from "../map/ignTileLayer";
-import { Control } from "ol/control";
 import { useIsMapLoading } from "./useIsMapLoading";
 
 export type AvailableLayer = "planIGN" | "ortho" | "admin" | "aiPrediction";
@@ -170,17 +167,6 @@ export const useMap = (
     const polygon = new Polygon(coordinates).transform(epsg4326, epsg3857);
 
     view.fit(polygon as Polygon, { padding: [150, 150, 150, 150] });
-
-    const feature = new Feature(polygon);
-    const vectorSource = new VectorSource({ features: [feature] });
-    const layer = new VectorLayer({ source: vectorSource });
-
-    assert(
-      map !== undefined,
-      "The map object should have been instantiated (it is after fist render) by the time this function is called",
-    );
-
-    map.addLayer(layer);
   });
 
   const setLayerOpacity = useConstCallback((layer: AvailableLayer, opacityValue: number) => {
