@@ -73,7 +73,7 @@ export const Root = ({
         serviceTitle={title}
         homeLinkProps={homeLinkProps}
         quickAccessItems={quickAccessItems}
-        serviceTagline="Prototype - version 1.2 - août 2023"
+        serviceTagline="Prototype - Version 1.2 - Août 2023"
       />
 
       <Outlet />

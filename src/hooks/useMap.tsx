@@ -166,7 +166,7 @@ export const useMap = (
     // TODO handle multi-polygon like Marseille
     const polygon = new Polygon(coordinates).transform(epsg4326, epsg3857);
 
-    view.fit(polygon as Polygon, { padding: [150, 150, 150, 150] });
+    view.fit(polygon as Polygon, { padding: [20, 20, 20, 20] });
   });
 
   const setLayerOpacity = useConstCallback((layer: AvailableLayer, opacityValue: number) => {
