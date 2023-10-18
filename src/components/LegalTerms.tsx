@@ -12,12 +12,13 @@ const useStyles = makeStyles()(theme => ({
 }));
 
 type Props = {
+  projectName: string;
   teamName: string;
   teamUrl: string;
   teamEmail: string;
 };
 
-export const LegalTerms = ({ teamName, teamUrl, teamEmail }: Props) => {
+export const LegalTerms = ({ projectName = "Inondata", teamName, teamUrl, teamEmail }: Props) => {
   const { classes } = useStyles();
   return (
     <section className={classes.body}>
@@ -25,7 +26,7 @@ export const LegalTerms = ({ teamName, teamUrl, teamEmail }: Props) => {
 
       <h6>Conception et gestion du site</h6>
       <p>
-        Inondata est conçu développé dans le cadre du{" "}
+        {projectName} est conçu développé dans le cadre du{" "}
         <a href="https://eig.etalab.gouv.fr/" target="_blank">
           programme Entrepreneurs d’Intérêt Général
         </a>{" "}
@@ -96,7 +97,7 @@ export const LegalTerms = ({ teamName, teamUrl, teamEmail }: Props) => {
       <h6>Accessibilité</h6>
       <p>Accessibilité : Non conforme</p>
       <p>
-        Inondata est développé selon les recommandations du Référentiel général d'amélioration de
+        {projectName} est développé selon les recommandations du Référentiel général d'amélioration de
         l'accessibilité (RGAA) mais n’a pas encore fait l’objet d’un audit permettant de garantir
         l’accessibilité des contenus.
       </p>
