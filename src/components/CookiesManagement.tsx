@@ -6,11 +6,11 @@ import { useCookiesManagement } from "../hooks/useCookiesManagement";
 const useStyles = makeStyles()(theme => ({
   body: {
     margin: "auto",
-    marginTop: fr.spacing("3w"),
     maxWidth: 1000,
     width: "90%",
     backgroundColor: theme.decisions.background.default.grey.default,
-    padding: fr.spacing("10w"),
+    marginTop: fr.spacing("5w"),
+    marginBottom: fr.spacing("5w"),
   },
 }));
 
