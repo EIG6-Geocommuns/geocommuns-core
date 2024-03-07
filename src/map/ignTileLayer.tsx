@@ -61,7 +61,7 @@ const getIgnWMTS = (layer: IGNLayers): WMTS => {
   ];
 
   return new WMTS({
-    url: `https://wxs.ign.fr/${LAYERS_TO_URL_CODE[layer]}/geoportail/wmts`,
+    url: `https://wxs-pgie.ign.fr/${LAYERS_TO_URL_CODE[layer]}/geoportail/wmts`,
     layer,
     matrixSet: "PM",
     format: LAYERS_TO_FORMAT[layer],
@@ -83,13 +83,13 @@ export const getIgnWMTSTileLayer = (layer: IGNLayers) => {
 // Here is GERS
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const gersPredictionSource = new ImageWMS({
-  url: "https://wxs.ign.fr/ocsge/geoportail/r/wms",
+  url: "https://wxs-pgie.ign.fr/ocsge/geoportail/r/wms",
   projection: EPSG3857,
   params: { WIDTH: "256", HEIGHT: "256", LAYERS: "OCSGE.VISU.2019" },
 });
 
 const rhoneAiPredictionSource = new ImageWMS({
-  url: "https://wxs.ign.fr/5jsuu4l5fobniiv05i5p54uk/geoportail/v/wms",
+  url: "https://wxs-pgie.ign.fr/5jsuu4l5fobniiv05i5p54uk/geoportail/v/wms",
   projection: EPSG3857,
   params: { LAYERS: "COSIA" },
 });
