@@ -17,14 +17,14 @@ const LAYERS_TO_FORMAT: { [key in IGNLayers]: "image/jpeg" | "image/png" } = {
   "COSIA": "image/png",
 };
 
-const LAYERS_TO_URL_CODE: {
+/*const LAYERS_TO_URL_CODE: {
   [key in IGNLayers]: "choisirgeoportail" | "0gd4sx9gxx6ves3hf3hfeyhw" | "5jsuu4l5fobniiv05i5p54uk";
 } = {
   "GEOGRAPHICALGRIDSYSTEMS.PLANIGNV2": "choisirgeoportail",
   "ORTHOIMAGERY.ORTHOPHOTOS": "choisirgeoportail",
   "LIMITES_ADMINISTRATIVES_EXPRESS.LATEST": "0gd4sx9gxx6ves3hf3hfeyhw",
   "COSIA": "5jsuu4l5fobniiv05i5p54uk",
-};
+};*/
 
 const EPSG3857 = "EPSG:3857";
 
@@ -61,7 +61,7 @@ const getIgnWMTS = (layer: IGNLayers): WMTS => {
   ];
 
   return new WMTS({
-    url: `https://wxs-pgie.ign.fr/${LAYERS_TO_URL_CODE[layer]}/geoportail/wmts`,
+    url: `https://data.geopf.fr/wmts`,
     layer,
     matrixSet: "PM",
     format: LAYERS_TO_FORMAT[layer],
